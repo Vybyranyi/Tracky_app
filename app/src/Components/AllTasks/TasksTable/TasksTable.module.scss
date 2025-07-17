@@ -1,0 +1,121 @@
+@use '../../../assets/styles/colorVariables.scss' as *;
+
+.tasksTable {
+    border-collapse: collapse;
+    width: 100%;
+    // max-width: 1124px;
+
+
+    .colTitle {
+    width: 528px;
+}
+.colDate {
+    width: 176px;
+}
+
+.colAction {
+    width: 68px;
+}
+
+.tableRow {
+    height: 60px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    color: var(--Gray-900);
+    cursor: pointer;
+    background-color: var(--White);
+}
+
+.tableRow:hover {
+    background-color: var(--Gray-50);
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+/* Колір для першого стовпця tbody */
+tbody tr td:first-child {
+    color: var(--Gray-900);
+}
+
+/* Колір для всіх інших стовпців tbody */
+tbody tr td:not(:first-child) {
+    color: var(--Gray-600);
+
+    & i {
+        width: 15px;
+        text-align: center;
+    }
+}
+
+.tableHeadRow {
+    height: 44px;
+    background-color: var(--Gray-50);
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 18px;
+    color: var(--Gray-600);
+}
+
+.tableRow td,
+.tableHeadRow td {
+    vertical-align: middle;
+    padding: 0 0 0 24px;
+    border-bottom: solid 1px var(--Gray-200);
+}
+
+.tableCheckbox {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    border-radius: 6px;
+    border: 1px solid var(--Gray-300);
+    cursor: pointer;
+}
+
+.cellContent {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.accordionRow {
+    background-color: var(--White);
+    border-bottom: solid 1px var(--Gray-200);
+}
+
+.accordionContent {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--Gray-500);
+    padding: 45px 11px;
+    margin: 0;
+}
+
+.dropdownItem {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--Gray-600);
+
+    & i {
+        margin-right: 8px;
+    }
+}
+
+.sortColumn {
+    cursor: pointer;
+    user-select: none;
+
+    & i {
+        margin-left: 5px;
+    }
+}
+}
+
+.showBtn{
+    width: fit-content;
+	margin: 10px auto;
+}

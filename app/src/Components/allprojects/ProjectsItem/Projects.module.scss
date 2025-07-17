@@ -1,0 +1,81 @@
+@use '../../../assets/styles/colorVariables.scss' as *;
+
+
+
+.project {
+	display: flex;
+	flex-direction: column;
+	row-gap: 16px;
+	flex-shrink: 0;
+	padding: 24px;
+	max-width: 328px;
+	box-sizing: border-box;
+
+}
+
+.wrapper{
+	max-width: 328px;
+	position: relative;
+	border-radius: 10px;
+	background-color: var(--White);
+	box-sizing: border-box;
+}
+
+
+.projectTitle {
+	color: var(--Black);
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%;
+	letter-spacing: -0.32px;
+	margin-bottom: 4px;
+}
+
+.projectSubtitle {
+	color: var(--Secondary-400);
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: -0.24px;
+}
+
+.projectProgress {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 150%;
+	letter-spacing: -0.32px;
+}
+
+.progressDesc {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 12px;
+
+	p:first-child {
+		color: var(--Black);
+	}
+}
+
+.progress {
+	color: var(--Projects-blue);
+}
+
+.deadline {
+	color: var(--Black);
+	display: flex;
+	align-items: center;
+	column-gap: 8px;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 150%;
+	letter-spacing: -0.32px;
+}
+
+
+.dropdown{
+	position: absolute;
+	top: 7px;
+	right: 10px;
+}
+

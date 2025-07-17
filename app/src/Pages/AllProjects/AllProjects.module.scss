@@ -1,0 +1,11 @@
+@use '../../assets/styles/colorVariables.scss' as *;
+.container{
+	color: var(--Secondary-500);
+	font-family: "Plus Jakarta Sans", sans-serif;
+	// max-width: 1408px;
+    width: 100%;
+}
+.btn{
+	width: fit-content;
+	margin: 20px auto;
+}

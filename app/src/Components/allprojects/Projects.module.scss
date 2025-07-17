@@ -1,0 +1,98 @@
+@use '../../assets/styles/colorVariables.scss' as *;
+
+.projectsNav {
+	display: flex;
+	align-items: center;
+	column-gap: 28px;
+
+	form {
+		position: relative;
+	}
+
+	padding-left: 28px;
+	margin: 20px 0 31px;
+
+	color: var(--Secondary-500);
+}
+
+.navBtns {
+	display: flex;
+	column-gap: 24px;
+	align-items: center;
+
+}
+
+.btn {
+	display: flex;
+	align-items: center;
+	column-gap: 12px;
+
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: -0.24px;
+
+	border-radius: 10px;
+	border: 1px solid var(--White-hover);
+	padding: 14px 28px;
+
+}
+
+.searchInput {
+	border-radius: 10px;
+	border: 1px solid var(--White-hover);
+	padding: 14px 28px;
+	min-width: 480px;
+
+	&::placeholder {
+		color: var(--Secondary-400);
+		font-size: 12px;
+		letter-spacing: -0.12px;
+	}
+}
+
+.searchBtn {
+	position: absolute;
+	top: 25%;
+	right: 28px;
+}
+
+.sliderWrapper {
+	padding-left: 38px;
+	margin-bottom: 16px;
+}
+
+
+.projectsSlider {
+	max-width: 1156px;
+}
+
+.sliderDesc {
+	display: flex;
+	align-items: center;
+	max-width: 1124px;
+	justify-content: space-between;
+}
+
+.sliderControls {
+	display: flex;
+	align-items: center;
+	column-gap: 10px;
+
+}
+
+.slick-slide>div {
+	padding: 0 12px;
+	box-sizing: border-box;
+}
+
+.slick-slide {
+	width: auto !important;
+}
+
+.icon {
+	color: var(--Secondary-400);
+}
+
+.navIcon {
+	color: var(--Secondary-400);
+}

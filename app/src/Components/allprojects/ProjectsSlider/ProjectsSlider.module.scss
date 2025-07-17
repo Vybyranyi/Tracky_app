@@ -1,0 +1,49 @@
+@use '../../../assets/styles/colorVariables.scss' as *;
+
+.sliderWrapper {
+	// padding-left: 38px;
+	margin-bottom: 16px;
+}
+
+
+.projectsSlider {
+	max-width: 1156px;
+}
+
+.sliderDesc {
+	margin-bottom: 18px;
+	display: flex;
+	align-items: center;
+	max-width: 1124px;		
+	justify-content: space-between;
+}
+
+.sliderControls {
+	display: flex;
+	align-items: center;
+	column-gap: 10px;
+	
+	button{
+		color: var(--Black);
+	}
+	
+}
+
+.slick-slide > div {
+	padding: 0 12px;
+	box-sizing: border-box;
+}
+
+.slick-slide {
+	width: auto !important;
+}
+
+
+.icon{
+	color: var(--Secondary-400);
+}
+
+.navIcon{
+	color: var(--Secondary-300);
+}
+

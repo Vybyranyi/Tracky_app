@@ -1,0 +1,74 @@
+@use '../../../assets/styles/colorVariables.scss' as *;
+
+.card {
+	border-radius: 10px;
+	// max-width: 354px;
+	box-sizing: border-box;
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	row-gap: 24px;
+	background-color: var(--White);
+}
+
+.person {
+	display: flex;
+	align-items: center;
+	column-gap: 8px;
+
+	img{
+		height: 48px;
+		width: 48px;
+	}
+}
+
+.name {
+	margin-bottom: 4px;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 150%; /* 24px */
+	letter-spacing: -0.32px;
+}
+
+.job {
+	color: var(--Secondary-400);
+
+
+	font-size: 12px;
+	letter-spacing: -0.12px;
+}
+
+.text {
+	color: var(--Secondary-300);
+
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 200%; /* 28px */
+}
+
+.desc {
+	display: flex;
+	justify-content: space-between;
+}
+
+.task {
+	display: flex;
+	column-gap: 8px;
+	align-items: center;
+
+	&:hover{
+		color: var(--Projects-blue)
+	}
+	
+}
+
+.rating, .task p {
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 150%; /* 21px */
+	letter-spacing: -0.28px;
+}
+
+.icon{
+	color: var(--Secondary-400);
+}

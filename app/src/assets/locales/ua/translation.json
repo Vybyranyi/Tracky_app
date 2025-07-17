@@ -1,0 +1,187 @@
+{
+  "sidebar":{
+	"overview": "Огляд",
+	"projects": "Проєкти",
+	"tasks": "Завдання",
+	"yourTeam": "Ваша команда",
+	"settings": "Налаштування"
+  },
+  "tabs": {
+    "all": "Усі",
+    "approved": "Підтверджені",
+    "pending": "В очікуванні",
+    "completed": "Завершені"
+  },
+  "header":{
+	  "greeting": "Привіт!",
+	  "taskReminder": "Давай закінчимо твоє завдання сьогодні!",
+    "logout": "вийти"
+  },
+  "settings":{
+    "themeLabel": "Тема",
+    "dark": "Темна",
+    "light": "Світла",
+    "language": "Мова"
+  },
+  	"actions": {
+	   "edit": "Редагувати",
+      "delete": "Видалити"
+    },
+  "projects": {
+    "actions": {
+      "new": "Новий проєкт",
+      "search": "Пошук проєкту"
+    },
+    "view": {
+      "showBy": "Показати за",
+      "category": "Категорії",
+      "list": "Списком"
+    },
+    "sort": {
+      "sortBy": "Сортувати за",
+      "default": "Типово",
+      "deadline": "Дедлайн",
+      "progress": "Прогрес"
+    },
+	"deadline": {
+    "left": "залишилось",
+		"days": "дні",
+		"day": "день",
+		"hour": "година",
+		"hours": "години",
+    "overdue": "Термін минув",
+    "today": "Дедлайн сьогодні"
+    },
+	"labels": {
+    "progress": "Прогрес",
+	  "manager": "Менеджер проекту: ",
+	  "desc": "Опис",
+	  "tasks": "Завдання"
+    },
+	"title": {
+      "newProject": "Новий проєкт",
+      "timeLimit": "Часовий ліміт",
+      "allProjects": "Всі проєкти"
+    },
+	"form": {
+      "editTitle": "Редагувати проєкт",
+      "createTitle": "Створити проєкт",
+      "saveButton": "Зберегти проєкт",
+      "createButton": "Створити проєкт",
+      "projectName": "Назва проєкту",
+      "namePlaceholder": "Введіть назву проєкту",
+      "descriptionPlaceholder": "Введіть опис...",
+      "deadline": "Дедлайн проєкту",
+      "manager": "Менеджер проєкту",
+			"managerPlaceholder": "Оберіть менеджера проєкту",
+      "validation": {
+        "title": {
+          "required": "Назва проєкту обов’язкова",
+          "min": "Мінімум 2 символи"
+        },
+        "desc": {
+          "max": "Максимум 300 символів"
+        },
+        "deadline": {
+          "required": "Потрібно вказати дедлайн"
+        },
+        "manager": {
+          "required": "Потрібно обрати менеджера"
+        }
+      }
+    }
+  },
+  "tasks": {
+    "status": {
+        "Approved": "Схвалено",
+        "Re work": "Перероблюється",
+        "Pending": "Очікується",
+        "In progress": "В роботі",
+        "Completed": "Виконано"
+      },
+    "search": "Пошук завдання",
+    "table": {
+        "taskName": "Назва завдання",
+        "taskCreated": "Дата створення",
+        "duoDate": "Термін",
+        "project": "Проєкт",
+        "status": "Статус"
+      },
+    "title": "Всі Завдання",
+    "btn": "Нове Завдання",
+    "pendingToday": "Рецензії, що очікують сьогодні",
+    "form": {
+        "createTitle": "Створити завдання",
+        "projectName": "Назва завдання",
+        "descriptionPlaceholder": "Введіть опис...",
+        "deadline": "Дедлайн завдання",
+        "datePlaceholder": "дд.мм.рррр",
+
+        "projectPlaceholder": "Оберіть проєкт",
+        "saveButton": "Зберегти завдання",
+        "createButton": "Створити завдання",
+        "namePlaceholder": "Введіть назву завдання",
+        "selectDev": "Оберіть розробника"
+    },
+    "dev": "Розробник",
+    "validation": {
+      "title": {
+        "required": "Назва завдання обов’язкова",
+        "min": "Мінімум 2 символи"
+      },
+      "description": {
+        "max": "Максимум 300 символів"
+      },
+      "duoDate": {
+        "required": "Потрібно вказати дедлайн"
+      },
+      "userId": {
+        "required": "Потрібно обрати розробника"
+      },
+      "projectId": {
+        "required": "Потрібно обрати проєкт"
+      }
+    }
+  },
+  "team":{
+    "task": "Завдань",
+    "title": "Твоя Команда та Менеджери",
+    "proj": "Проекти"
+  },
+	"statisticTotal": "Виконано завданнь",
+	"show": "Показати всі",
+  "projSummary": {
+    "name": "Назва",
+    "manager": "Менеджер проєкту",
+    "deadline": "Дедлайн",
+    "progress": "Прогрес",
+    "labels": {
+      "proj": "Проект",
+      "manager":"Менеджер проєкту"
+    }
+  },
+  "auth": {
+    "welcome": "Ласкаво просимо!",
+    "loginTitle": "Увійти в",
+    "continue": "Продовжити",
+    "usernameLabel": "Ім’я користувача або ID",
+    "usernamePlaceholder": "Введіть ім’я користувача або ID",
+    "passwordLabel": "Пароль",
+    "passwordPlaceholder": "Введіть пароль",
+    "remember": "Запам’ятати мене",
+    "loginButton": "Увійти",
+    "validation": {
+      "login": {
+        "min": "Логін має містити більше 5 символів",
+        "max": "Логін має бути коротше 20 символів",
+        "required": "Логін обов'язковий"
+      },
+      "password": {
+        "min": "Пароль має бути щонайменше з 6 символів",
+        "required": "Пароль обов'язковий"
+      }
+    }
+  }
+
+  
+}
