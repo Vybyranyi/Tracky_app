@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Sidebar.module.scss";
 import SidebarItem from "../SidebarItem/SidebarItem";
-import logo from "../../assets/Hillel-Logo.png";
+import logo from "../../assets/images/logo.svg";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 

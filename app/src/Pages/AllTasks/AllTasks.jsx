@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setActiveStatus } from '../../store/Tasks/TasksSlice';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import HelmetComponent from '../../Components/Helmet/HelmetComponent';
 
 
 export default function AllTasks() {
@@ -46,6 +47,7 @@ export default function AllTasks() {
 
     return (
         <>
+        <HelmetComponent title={t("helmetTitle.alltasks")} />
             <div className={styles.SerachBlock}>
                 <TasksSearch />
                 <div className={styles.StatusButtonsBlock}>

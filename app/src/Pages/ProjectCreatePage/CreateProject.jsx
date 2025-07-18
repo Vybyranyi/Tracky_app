@@ -4,15 +4,18 @@ import { useNavigate } from 'react-router';
 import { addProject } from '../../store/projects/projectsSlice';
 import ProjectForm from "../../Components/ProjectForm/ProjectForm";
 import { fetchUsers } from '../../store/Users/usersSlice';
+import HelmetComponent from "../../Components/Helmet/HelmetComponent";
+import { useTranslation } from "react-i18next";
 
 export default function CreateProject() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { users } = useSelector(state => state.users);
+    const { t } = useTranslation();
 
     useEffect(() => {
         dispatch(fetchUsers());
-      }, [dispatch]);
+    }, [dispatch]);
 
     const handleCreate = (data) => {
         dispatch(addProject(data));
@@ -28,8 +31,9 @@ export default function CreateProject() {
 
     return (
         <div>
+            <HelmetComponent title={t('helmetTitle.createproject')} />
             <ProjectForm
-                initialValues = {initialValues}
+                initialValues={initialValues}
                 users={users}
                 onSubmit={handleCreate}
                 isEdit={false}

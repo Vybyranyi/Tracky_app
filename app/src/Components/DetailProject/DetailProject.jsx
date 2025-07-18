@@ -6,6 +6,7 @@ import TaskTable from '../AllTasks/TasksTable/TasksTable'
 import { fetchProjects } from '../../store/projects/projectsSlice';
 import { useTranslation } from 'react-i18next';
 import { getDeadlineLabel } from '../../utils/deadlineUtils';
+import HelmetComponent from '../Helmet/HelmetComponent';
 
 
 function DetailProject() {
@@ -38,6 +39,7 @@ function DetailProject() {
 
 	return (
 		<div className={styles.wrapper}>
+			<HelmetComponent title={project.title} />
 			<div className={styles.banner}>
 				<img src={`/projects/${project.img}.png`}/>
 			</div>	

@@ -5,6 +5,7 @@ import styles from './LoginForm.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInAsync } from '../../store/Auth/AuthSlice';
 import { useTranslation } from "react-i18next";
+import HelmetComponent from '../../Components/Helmet/HelmetComponent';
 
 
 export default function LoginForm() {
@@ -23,7 +24,6 @@ export default function LoginForm() {
 
     const dispatch = useDispatch();
     const error = useSelector(state => state.auth.error);
-    // const error = 'шо тут помилка';
     const [swowPassword, setSwowPassword] = useState(false);
 
     useEffect(() => {
@@ -38,6 +38,7 @@ export default function LoginForm() {
 
     return (
         <div className={styles.loginContainer}>
+            <HelmetComponent title={t('helmetTitle.login')} />
             <div className={styles.loginFormMainBlock}>
                 <h3 className={styles.thinWelcome}>{t('auth.welcome')}</h3>
                 <h3 className={styles.loginTitle}>{t('auth.loginTitle')}</h3>

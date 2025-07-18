@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { selectProjectsEnriched } from '../../store/selectors/selectors';
 import BigButton from '../../Components/BigButton/BigButton';
 import { filterProjects } from '../../store/projects/projectsSlice';
+import HelmetComponent from '../../Components/Helmet/HelmetComponent';
 
 function AllProjects() {
 	const { t } = useTranslation();
@@ -47,6 +48,7 @@ function AllProjects() {
 
 	return (
 		<div className={styles.container}>
+			<HelmetComponent title={t('helmetTitle.allprojects')} />
 			{!filtred.isFiltred ? (
 				<>
 					<ProjectsNavigation />

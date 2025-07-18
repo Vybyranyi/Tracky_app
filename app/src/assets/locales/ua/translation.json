@@ -181,7 +181,18 @@
         "required": "Пароль обов'язковий"
       }
     }
-  }
-
+  },
+	"helmetTitle": {
+		"overview": "Огляд",
+		"alltasks": "Всі завдання",
+		"createtask": "Створити завдання",
+		"edittask": "Редагувати завдання",
+		"allprojects": "Всі проєкти",
+		"createproject": "Створити проєкт",
+		"editproject": "Редагувати проєкт",
+		"team": "Команда",
+		"settings": "Налаштування",
+		"login": "Вхід"
+	}
   
 }
