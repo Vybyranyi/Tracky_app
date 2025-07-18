@@ -4,10 +4,31 @@ const getInitialToken = () => {
   return localStorage.getItem('token') || sessionStorage.getItem('token') || '';
 };
 
+// Перевіряємо чи токен не закінчився
+const isTokenExpired = (token) => {
+  if (!token) return true;
+  
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const currentTime = Date.now() / 1000;
+    return payload.exp < currentTime;
+  } catch {
+    return true;
+  }
+};
+
+const initialToken = getInitialToken();
+const tokenValid = initialToken && !isTokenExpired(initialToken);
+
+// Якщо токен закінчився - очищаємо сховище
+if (initialToken && !tokenValid) {
+  localStorage.removeItem('token');
+  sessionStorage.removeItem('token');
+}
+
 const initialState = {
-  isAuth: !!getInitialToken(),
-  // isAuth: true,
-  token: getInitialToken(),
+  isAuth: tokenValid,
+  token: tokenValid ? initialToken : '',
   error: null
 };
 
@@ -50,6 +71,15 @@ const authSlice = createSlice({
     setAuth: (state, action) => {
       state.isAuth = true;
       state.token = action.payload;
+    },
+    // Перевіряємо токен вручну
+    checkToken: (state) => {
+      if (state.token && isTokenExpired(state.token)) {
+        state.isAuth = false;
+        state.token = '';
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+      }
     }
   },
   extraReducers: builder => {
@@ -67,5 +97,5 @@ const authSlice = createSlice({
   }
 });
 
-export const { logout, setAuth } = authSlice.actions;
+export const { logout, setAuth, checkToken } = authSlice.actions;
 export default authSlice.reducer;

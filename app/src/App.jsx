@@ -20,6 +20,7 @@ import { fetchTasks } from "./store/Tasks/TasksSlice";
 import { fetchUsers } from "./store/Users/usersSlice";
 import { fetchProjects } from "./store/projects/projectsSlice";
 import EditProject from "./Pages/ProjectEditPage/EditProject";
+import { useAuth } from "./utils/useAuth";
 
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
 
   const location = useLocation();
   const isFullHeader = !(location.pathname === '/team' || location.pathname === '/settings');
+
+  useAuth();
 
   useEffect(() => {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
