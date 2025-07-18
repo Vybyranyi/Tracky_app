@@ -16,7 +16,7 @@ export default function StatistickBlock({ type }) {
     }
     switch (type) {
         case 'total_tasks':
-            number = tasks.filter(task => task.tick === true).length;
+            number = tasks.filter(task => task.status === 'Approved').length;
     }
 
     return (

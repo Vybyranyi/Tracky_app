@@ -4,7 +4,7 @@ import styles from './TodaysTask.module.scss';
 import { Dropdown, Empty } from 'antd';
 import StatusButton from '../AllTasks/StatusButton/StatusButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleSort, toggleTask, toggleAllTasks, deleteTask, changeTaskStatus, setExtendetRow } from '../../store/Tasks/TasksSlice';
+import { changeTaskStatus } from '../../store/Tasks/TasksSlice';
 import { useTranslation } from 'react-i18next';
 
 export default function TodaysTask() {
@@ -85,13 +85,6 @@ export default function TodaysTask() {
                             <React.Fragment key={index}>
                                 <tr>
                                     <td>
-                                        <input
-                                            type="checkbox"
-                                            className={styles.tableCheckbox}
-                                            onClick={(e) => e.stopPropagation()}
-                                            checked={task.tick}
-                                            onChange={() => dispatch(toggleTask(task.id))}
-                                        />
                                         <span className={styles.TaskTitle}>{task.title}</span>
                                     </td>
                                     <td>

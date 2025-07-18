@@ -14,9 +14,10 @@ export default function TaskTabs() {
 
   const tabs = [
     { text: t('tabs.all'), dispatch: '' },
-    { text: t('tabs.approved'), dispatch: 'Approved' },
-    { text: t('tabs.pending'), dispatch: 'Pending' },
-    { text: t('tabs.completed'), dispatch: 'Completed' },
+    { text: t('tasks.status.Approved'), dispatch: 'Approved' },
+    { text: t('tasks.status.Re work'), dispatch: 'Re work' },
+    { text: t('tasks.status.Pending'), dispatch: 'Pending' },
+    { text: t('tasks.status.In progress'), dispatch: 'In progress' },
   ];
 
   const dispatch = useDispatch();

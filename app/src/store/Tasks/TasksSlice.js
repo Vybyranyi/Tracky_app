@@ -6,7 +6,6 @@ const initialState = {
   activeStatus: '',
   sortField: null,
   sortDirection: null,
-  allTasksTicked: false,
   expandedRows: [],
   searchDate: '',
   editTask: null,
@@ -58,23 +57,6 @@ const tasksSlice = createSlice({
         state.sortField = null;
         state.sortDirection = null;
       }
-    },
-    toggleTask(state, action) {
-      const id = action.payload;
-      const task = state.tasks.find(task => task.id === id);
-      if (task) {
-        if (task.tick === true) {
-          state.allTasksTicked = false;
-        }
-        task.tick = !task.tick;
-      }
-    },
-    toggleAllTasks(state) {
-      const allSelected = state.tasks.every(t => t.tick);
-      const newValue = !allSelected;
-
-      state.tasks.forEach(t => t.tick = newValue);
-      state.allTasksTicked = newValue;
     },
     changeTaskStatus(state, action) {
       const { id, status } = action.payload;
@@ -155,8 +137,6 @@ export const {
   setSearchValue,
   setActiveStatus,
   toggleSort,
-  toggleTask,
-  toggleAllTasks,
   changeTaskStatus,
   setExtendetRow,
   deleteTask,

@@ -1,8 +1,8 @@
-import React, {  } from 'react';
+import React, { } from 'react';
 import styles from './TasksTable.module.scss';
 import { Empty, Dropdown } from "antd";
 import StatusButton from '../StatusButton/StatusButton';
-import { toggleSort, toggleTask, toggleAllTasks, deleteTask, changeTaskStatus, setExtendetRow, filterTasks, addEditTask } from '../../../store/Tasks/TasksSlice';
+import { toggleSort, deleteTask, changeTaskStatus, setExtendetRow, filterTasks, addEditTask } from '../../../store/Tasks/TasksSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { t } from 'i18next';
 import BigButton from '../../BigButton/BigButton';
@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export default function TasksTable({tasks, isProjectsTasks = false}) {
+export default function TasksTable({ tasks, isProjectsTasks = false }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -18,12 +18,11 @@ export default function TasksTable({tasks, isProjectsTasks = false}) {
     const sortDirection = useSelector((state) => state.tasks.sortDirection);
     const activeStatus = useSelector((state) => state.tasks.activeStatus);
     const searchValue = useSelector((state) => state.tasks.searchValue);
-    const allTasksTicked = useSelector((state) => state.tasks.allTasksTicked);
     const expandedRows = useSelector((state) => state.tasks.expandedRows);
     const searchDate = useSelector((state) => state.tasks.searchDate);
     const projects = useSelector(state => state.projects.projectsList);
     const filtred = useSelector(state => state.tasks.filtred);
-    
+
 
     // Обробка кліку по заголовку таблиці для сортування
     const handleSort = (field) => {
@@ -32,14 +31,14 @@ export default function TasksTable({tasks, isProjectsTasks = false}) {
 
     // Створюємо копію tasks
     let displayedTasks = [...tasks];
-    
-    if(!isProjectsTasks){
+
+    if (!isProjectsTasks) {
         displayedTasks = displayedTasks.map(task => {
             const taskId = task.projectId;
-            const project = projects.find(proj => proj.id == taskId );
-            
+            const project = projects.find(proj => proj.id == taskId);
+
             const projectName = project ? project.title : 'Unknown';
-            const newTask = {...task, projectName};
+            const newTask = { ...task, projectName };
             return newTask;
         })
     }
@@ -52,9 +51,7 @@ export default function TasksTable({tasks, isProjectsTasks = false}) {
     }
 
     // Якщо передано фільтр — фільтруємо таски за статусом
-    if (activeStatus === 'Completed') {
-        displayedTasks = displayedTasks.filter(task => task.tick === true);
-    } else if (activeStatus) {
+    if (activeStatus) {
         displayedTasks = displayedTasks.filter(task =>
             task.status.toLowerCase() === activeStatus.toLowerCase()
         );
@@ -76,7 +73,7 @@ export default function TasksTable({tasks, isProjectsTasks = false}) {
         )
     };
 
-    if(filtred.isFiltred){
+    if (filtred.isFiltred) {
         displayedTasks = displayedTasks.filter(task => task.userId == filtred.filtredBy)
     }
 
@@ -159,7 +156,7 @@ export default function TasksTable({tasks, isProjectsTasks = false}) {
         },
     ]
 
-    const handleShowAll = () =>{
+    const handleShowAll = () => {
         dispatch(filterTasks());
         displayedTasks = [...tasks];
     }
@@ -183,35 +180,29 @@ export default function TasksTable({tasks, isProjectsTasks = false}) {
                         <tr className={styles.tableHeadRow}>
                             <td>
                                 <div className={styles.cellContent}>
-                                <input
-                                    type="checkbox"
-                                    className={styles.tableCheckbox}
-                                    checked={allTasksTicked}
-                                    onChange={() => dispatch(toggleAllTasks())}
-                                />
-                                {t('tasks.table.taskName')}
+                                    {t('tasks.table.taskName')}
                                 </div>
                             </td>
                             <td onClick={() => handleSort('taskCreated')} className={styles.sortColumn}>
                                 {t('tasks.table.taskCreated')}
                                 {sortField === 'taskCreated' && (
-                                <span>
-                                    {sortDirection === 'asc'
-                                    ? <i className="fa-solid fa-arrow-up"></i>
-                                    : <i className="fa-solid fa-arrow-down"></i>
-                                    }
-                                </span>
+                                    <span>
+                                        {sortDirection === 'asc'
+                                            ? <i className="fa-solid fa-arrow-up"></i>
+                                            : <i className="fa-solid fa-arrow-down"></i>
+                                        }
+                                    </span>
                                 )}
                             </td>
                             <td onClick={() => handleSort('duoDate')} className={styles.sortColumn}>
                                 {t('tasks.table.duoDate')}
                                 {sortField === 'duoDate' && (
-                                <span>
-                                    {sortDirection === 'asc'
-                                    ? <i className="fa-solid fa-arrow-up"></i>
-                                    : <i className="fa-solid fa-arrow-down"></i>
-                                    }
-                                </span>
+                                    <span>
+                                        {sortDirection === 'asc'
+                                            ? <i className="fa-solid fa-arrow-up"></i>
+                                            : <i className="fa-solid fa-arrow-down"></i>
+                                        }
+                                    </span>
                                 )}
                             </td>
                             {!isProjectsTasks && <td>{t('tasks.table.project')}</td>}
@@ -233,13 +224,6 @@ export default function TasksTable({tasks, isProjectsTasks = false}) {
                                 >
                                     <td>
                                         <div className={styles.cellContent}>
-                                            <input
-                                                type="checkbox"
-                                                className={styles.tableCheckbox}
-                                                onClick={(e) => e.stopPropagation()}
-                                                checked={task.tick}
-                                                onChange={() => dispatch(toggleTask(task.id))}
-                                            />
                                             <span>{task.title}</span>
                                         </div>
                                     </td>
@@ -297,7 +281,7 @@ export default function TasksTable({tasks, isProjectsTasks = false}) {
                 </table>
             )}
             {filtred.isFiltred && <div className={styles.showBtn}>
-                <BigButton style='purple' text={t("show")} onClick={handleShowAll}/>
+                <BigButton style='purple' text={t("show")} onClick={handleShowAll} />
             </div>}
         </>
     );

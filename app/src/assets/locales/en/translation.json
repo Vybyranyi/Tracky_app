@@ -7,10 +7,7 @@
 		"settings": "Settings"
 	},
 	"tabs": {
-		"all": "All",
-		"approved": "Approved",
-		"pending": "Pending",
-		"completed": "Completed"
+		"all": "All"
 	},
 	"header": {
 		"greeting": "Hi There!",

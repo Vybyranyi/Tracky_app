@@ -45,7 +45,6 @@ export default function TaskForm({
                         : {
                             ...values,
                             id: Date.now(),
-                            tick: false,
                             taskCreated: new Date().toISOString().split('T')[0],
                             status: 'In progress',
                         };

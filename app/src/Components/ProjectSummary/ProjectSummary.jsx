@@ -45,65 +45,6 @@ function ProjectSummary() {
 			}
 		});
 
-	// const getStatus = () => [
-	// 	{
-	// 		key: 'Active',
-	// 		label: 'Active',
-	// 	},
-	// 	{
-	// 		key: 'Completed',
-	// 		label: 'Completed',
-	// 	},
-	// 	{
-	// 		key: 'On Hold',
-	// 		label: 'On Hold',
-	// 	}
-	// ];
-
-
-	// const getTaskStatuses = () => [
-	// 	{
-	// 		key: 'Approved',
-	// 		label: (
-	// 			<StatusButton text='Approved' />
-	// 		),
-	// 		onClick: (e) => {
-	// 			e.domEvent.stopPropagation();
-	// 			// dispatch(changeTaskStatus({ id: task.id, status: 'Approved' }))
-	// 		}
-	// 	},
-	// 	{
-	// 		key: 'Re work',
-	// 		label: (
-	// 			<StatusButton text='Re work' />
-	// 		),
-	// 		onClick: (e) => {
-	// 			e.domEvent.stopPropagation();
-	// 			// dispatch(changeTaskStatus({ id: task.id, status: 'Re work' }))
-	// 		}
-	// 	},
-	// 	{
-	// 		key: 'Pending',
-	// 		label: (
-	// 			<StatusButton text='Pending' />
-	// 		),
-	// 		onClick: (e) => {
-	// 			e.domEvent.stopPropagation();
-	// 			// dispatch(changeTaskStatus({ id: task.id, status: 'Pending' }))
-	// 		}
-	// 	},
-	// 	{
-	// 		key: 'In progress',
-	// 		label: (
-	// 			<StatusButton text='In progress' />
-	// 		),
-	// 		onClick: (e) => {
-	// 			e.domEvent.stopPropagation();
-	// 			// dispatch(changeTaskStatus({ id: task.id, status: 'In progress' }))
-	// 		}
-	// 	},
-	// ]
-
 	return (
 		<div className={styles.ProjectSummaryContainer}>
 			<div className={styles.ProjectSummaryHeader}>
