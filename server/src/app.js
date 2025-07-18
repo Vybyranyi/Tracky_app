@@ -2,13 +2,18 @@ import express from 'express';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import tasks from './tasks.js';
-import projects from './projects.js';
-import team from './team.js';
+import Task from '../Models/Task.js';
+import Project from '../Models/Project.js';
+import TeamMember from '../Models/Team.js';
+import mongoose from 'mongoose';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+mongoose.connect('mongodb+srv://marianEduCnu:5tnghL64l4Vj5uei@cluster0.rqclvuf.mongodb.net/tracky?retryWrites=true&w=majority&appName=Cluster0')
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 const students = [];
 
@@ -41,16 +46,39 @@ const authMiddleware = (req, res, next) => {
   });
 }
 
-app.get('/api/tasks', authMiddleware, (req, res) => {
-  res.json(tasks);
+app.get('/api/tasks', authMiddleware, async (req, res) => {
+  try {
+    const tasks = await Task.find();
+    res.json(tasks);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-app.get('/api/projects', authMiddleware, (req, res) => {
-  res.json(projects);
+app.get('/api/projects', authMiddleware, async (req, res) => {
+  try {
+    const projects = await Project.find();
+
+    const projectsByCategory = projects.reduce((acc, project) => {
+      const category = project.category || 'newProj';
+      if (!acc[category]) acc[category] = [];
+      acc[category].push(project);
+      return acc;
+    }, {});
+
+    res.json(projectsByCategory);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-app.get('/api/team', authMiddleware, (req, res) => {
-  res.json(team);
+app.get('/api/team', authMiddleware, async (req, res) => {
+  try {
+    const team = await TeamMember.find();
+    res.json(team);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 const PORT = process.env.PORT || 3000;
