@@ -102,47 +102,47 @@ const projectsSlice = createSlice({
 			state.searchValue = action.payload;
 			return state;
 		},
-		addProject: (state, action) => {
-			const project = action.payload;
+		// addProject: (state, action) => {
+		// 	const project = action.payload;
 
-			const deadlineAmount = calculateDaysLeft(project.deadline);
+		// 	const deadlineAmount = calculateDaysLeft(project.deadline);
 
-			const newProject = { ...project, deadlineAmount };
+		// 	const newProject = { ...project, deadlineAmount };
 
-			const category = project.category || 'newProj';
+		// 	const category = project.category || 'newProj';
 
-			if (state.projectsCategories[category]) {
-			  state.projectsCategories[category].push(newProject);
-			} else {
-			  state.projectsCategories[category] = [newProject];
-			}
+		// 	if (state.projectsCategories[category]) {
+		// 	  state.projectsCategories[category].push(newProject);
+		// 	} else {
+		// 	  state.projectsCategories[category] = [newProject];
+		// 	}
 
-			state.projectsList = Object.values(state.projectsCategories).flat();
-		},
-		editProject: (state, action) => {
-			const updatedProject = action.payload;
-			const entries = Object.entries(state.projectsCategories);
+		// 	state.projectsList = Object.values(state.projectsCategories).flat();
+		// },
+		// editProject: (state, action) => {
+		// 	const updatedProject = action.payload;
+		// 	const entries = Object.entries(state.projectsCategories);
 
-			state.projectsCategories = Object.fromEntries(
-			  	entries.map(([key, arr]) => [
-					key,
-					arr.map(project => project.id === updatedProject.id ? updatedProject : project)
-			  	])
-			);
+		// 	state.projectsCategories = Object.fromEntries(
+		// 	  	entries.map(([key, arr]) => [
+		// 			key,
+		// 			arr.map(project => project.id === updatedProject.id ? updatedProject : project)
+		// 	  	])
+		// 	);
 
-			state.projectsList = Object.values(state.projectsCategories).flat();
-		},
-		updateProject: (state, action) => {
-			const updated = action.payload;
-			const entries = Object.entries(state.projectsCategories);
-			state.projectsCategories = Object.fromEntries(
-			  	entries.map(([key, arr]) => [
-					key,
-					arr.map((item) => (item.id === updated.id ? updated : item))
-			  	])
-			);
-			state.projectsList = Object.values(state.projectsCategories).flat();
-		},
+		// 	state.projectsList = Object.values(state.projectsCategories).flat();
+		// },
+		// updateProject: (state, action) => {
+		// 	const updated = action.payload;
+		// 	const entries = Object.entries(state.projectsCategories);
+		// 	state.projectsCategories = Object.fromEntries(
+		// 	  	entries.map(([key, arr]) => [
+		// 			key,
+		// 			arr.map((item) => (item.id === updated.id ? updated : item))
+		// 	  	])
+		// 	);
+		// 	state.projectsList = Object.values(state.projectsCategories).flat();
+		// },
 		filterProjects: (state, action) =>{
 			if(action.payload){
 				state.filtred.isFiltred = true;
