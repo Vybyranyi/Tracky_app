@@ -56,6 +56,34 @@ app.get('/api/tasks', authMiddleware, async (req, res) => {
   }
 });
 
+app.post('/api/tasks', authMiddleware, async (req, res) => {
+  try {
+    const newTask = new Task(req.body);
+    await newTask.save();
+    res.status(201).json(newTask);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.put('/api/tasks/:id', authMiddleware, async (req, res) => {
+  try {
+    const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(updatedTask);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.delete('/api/tasks/:id', authMiddleware, async (req, res) => {
+  try {
+    await Task.findByIdAndDelete(req.params.id);
+    res.sendStatus(204);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 // Endpoints for Projects
 app.get('/api/projects', authMiddleware, async (req, res) => {
   try {
