@@ -130,12 +130,41 @@ app.delete('/api/projects/:id', authMiddleware, async (req, res) => {
   }
 });
 
+// Endpoints for Team
 app.get('/api/team', authMiddleware, async (req, res) => {
   try {
     const team = await TeamMember.find();
     res.json(team);
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/team', authMiddleware, async (req, res) => {
+  try {
+    const newTeamMember = new TeamMember(req.body);
+    await newTeamMember.save();
+    res.status(201).json(newTeamMember);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.put('/api/team/:id', authMiddleware, async (req, res) => {
+  try {
+    const updatedTeamMember = await TeamMember.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(updatedTeamMember);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.delete('/api/team/:id', authMiddleware, async (req, res) => {
+  try {
+    await TeamMember.findByIdAndDelete(req.params.id);
+    res.sendStatus(204);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 });
 
