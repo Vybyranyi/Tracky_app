@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const teamMemberSchema = new mongoose.Schema({
-  id: Number,
+  // id: Number,
   name: String,
   job: String,
   desc: String,

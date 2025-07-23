@@ -59,15 +59,15 @@ const tasksSlice = createSlice({
       }
     },
     changeTaskStatus(state, action) {
-      const { id, status } = action.payload;
-      const task = state.tasks.find(task => task.id === id);
+      const { _id, status } = action.payload;
+      const task = state.tasks.find(task => task._id === _id);
       task.status = status;
     },
     setExtendetRow(state, action) {
-      const id = action.payload;
-      const index = state.expandedRows.indexOf(id);
+      const _id = action.payload;
+      const index = state.expandedRows.indexOf(_id);
       if (index === -1) {
-        state.expandedRows.push(id);
+        state.expandedRows.push(_id);
       } else {
         state.expandedRows.splice(index, 1);
       }
@@ -87,20 +87,20 @@ const tasksSlice = createSlice({
     addEditTask(state, action) {
       // записквати в editTask 
       const taskId = action.payload;
-      const task = state.tasks.find(t => t.id === taskId);
+      const task = state.tasks.find(t => t._id === taskId);
       state.editTask = task ? { ...task } : null;
     },
     saveEditedTask(state, action) {
       // зберігаєш відредагований такс 
       const editedTask = action.payload;
-      const index = state.tasks.findIndex(t => t.id === editedTask.id);
+      const index = state.tasks.findIndex(t => t._id === editedTask._id);
       if (index !== -1) {
         state.tasks[index] = editedTask;
       }
       state.editTask = null;
     },
     deleteTask(state, action) {
-      state.tasks = state.tasks.filter(item => item.id !== action.payload);
+      state.tasks = state.tasks.filter(item => item._id !== action.payload);
     },
     filterTasks: (state, action) =>{
 			if(action.payload){

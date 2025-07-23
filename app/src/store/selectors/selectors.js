@@ -11,7 +11,7 @@ export const selectProjectsEnriched = createSelector(
     if (!projects || !tasks) return { list: [], categories: { newProj: [], timeLim: [] } };
 
     const list = projects.map(project => {
-      const progress = calculateProjectProgress(tasks, project.id);
+      const progress = calculateProjectProgress(tasks, project._id);
       const daysLeft = calculateDaysLeft(project.deadline);
       return { ...project, progress, daysLeft };
     });

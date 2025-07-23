@@ -18,8 +18,8 @@ function DetailProject() {
   	const tasks = useSelector(state => state.tasks.tasks);
   	const users = useSelector(state => state.users.users);
 
-  	const project = projects.find(proj => proj.id == id);
-  	const user = project ? users.find(u => u.id === project.managerId) : null;
+  	const project = projects.find(proj => proj._id == id);
+  	const user = project ? users.find(u => u._id === project.managerId) : null;
 	const displayedTasks = tasks.filter(task => task.projectId == id);
 
   	useEffect(() => {

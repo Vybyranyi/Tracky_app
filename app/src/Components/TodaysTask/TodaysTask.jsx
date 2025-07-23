@@ -31,7 +31,7 @@ export default function TodaysTask() {
             ),
             onClick: (e) => {
                 e.domEvent.stopPropagation();
-                dispatch(changeTaskStatus({ id: task.id, status: 'Approved' }))
+                dispatch(changeTaskStatus({ _id: task._id, status: 'Approved' }))
             }
         },
         {
@@ -41,7 +41,7 @@ export default function TodaysTask() {
             ),
             onClick: (e) => {
                 e.domEvent.stopPropagation();
-                dispatch(changeTaskStatus({ id: task.id, status: 'Re work' }))
+                dispatch(changeTaskStatus({ _id: task._id, status: 'Re work' }))
             }
         },
         {
@@ -51,7 +51,7 @@ export default function TodaysTask() {
             ),
             onClick: (e) => {
                 e.domEvent.stopPropagation();
-                dispatch(changeTaskStatus({ id: task.id, status: 'Pending' }))
+                dispatch(changeTaskStatus({ _id: task._id, status: 'Pending' }))
             }
         },
         {
@@ -61,7 +61,7 @@ export default function TodaysTask() {
             ),
             onClick: (e) => {
                 e.domEvent.stopPropagation();
-                dispatch(changeTaskStatus({ id: task.id, status: 'In progress' }))
+                dispatch(changeTaskStatus({ _id: task._id, status: 'In progress' }))
             }
         },
     ]

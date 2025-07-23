@@ -35,7 +35,7 @@ function ProjectsSlider({ title, projects }) {
 			<div className={styles.projectsSlider}>
 				{Array.isArray(projects) && projects.length > 0 ? (
 					<Slider ref={sliderRef} {...settings}>
-						{projects.map(item => <ProjectsItem obj={item} key={item.id || item.name} />)}
+						{projects.map(item => <ProjectsItem obj={item} key={item._id || item.name} />)}
 					</Slider>
 				) : (
 					<Empty />

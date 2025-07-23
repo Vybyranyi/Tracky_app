@@ -17,7 +17,7 @@ function ProjectsList({ arr }) {
 
 	if(filtred.isFiltred){
 		console.log(users)
-		user = users.find(usr => usr.id == filtred.filtredBy);
+		user = users.find(usr => usr._id == filtred.filtredBy);
 	}
 
 

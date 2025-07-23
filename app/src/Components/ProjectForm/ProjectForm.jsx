@@ -38,7 +38,7 @@ export default function ProjectForm({
                 onSubmit={(values, { resetForm }) => {
                     const payload = isEdit
                         ? values
-                        : { ...values, id: Date.now(), category: 'newProj', img: '01' };
+                        : { ...values, category: 'newProj', img: '01' };
                     onSubmit(payload);
                     if (!isEdit) resetForm();
                 }} enableReinitialize

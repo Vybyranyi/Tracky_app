@@ -20,17 +20,17 @@ function TeamItem({obj}) {
 
 	
 	if(obj.role == 'manager'){
-		amount = projects.filter(proj => proj.managerId == obj.id).length;
+		amount = projects.filter(proj => proj.managerId == obj._id).length;
 	} 	else{
-		amount = tasks.filter(task => task.userId == obj.id).length;
+		amount = tasks.filter(task => task.userId == obj._id).length;
 	}
 
 	const handleNavigate = () => {
 		if(obj.role === 'manager'){
-			dispatch(filterProjects(obj.id));
+			dispatch(filterProjects(obj._id));
 			navigate('/allprojects');
 		}else{
-			dispatch(filterTasks(obj.id));
+			dispatch(filterTasks(obj._id));
 			navigate('/alltasks')
 		}
 		

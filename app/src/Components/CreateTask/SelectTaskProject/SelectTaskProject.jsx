@@ -24,7 +24,7 @@ export default function SelectTaskProject({ value, onChange }) {
         }}
       >
         {projects.map(project => (
-          <Option key={project.id} value={project.id}>
+          <Option key={project._id} value={project._id}>
             <div className={styles.option}>
               <Avatar src={`projects/${project.img}.png`} size="small" />
               <span className={styles.name}>{project.title}</span>

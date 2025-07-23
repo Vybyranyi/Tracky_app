@@ -16,14 +16,14 @@ function ProjectsItem({ obj }) {
     {
       key: '1',
       onClick: () => {
-        dispatch(deleteProject(obj.id));
+        dispatch(deleteProject(obj._id));
       },
       label: <a>{t('actions.delete')}</a>,
     },
     {
       key: '2',
 	  label: (
-		<Link to={`/projects/edit/${obj.id}`} className={styles.editLink}>
+		<Link to={`/projects/edit/${obj._id}`} className={styles.editLink}>
 		  {t('actions.edit')}
 		</Link>
 	  ),
@@ -33,7 +33,7 @@ function ProjectsItem({ obj }) {
 
   return (
     <div className={styles.wrapper}>
-		<Link to={`/allprojects/${obj.id}`}>
+		<Link to={`/allprojects/${obj._id}`}>
 		  <div className={styles.project}>
 			<img
 			  src={`/projects/${obj.img}.png`}

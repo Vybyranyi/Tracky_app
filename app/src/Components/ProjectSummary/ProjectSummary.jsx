@@ -20,7 +20,7 @@ function ProjectSummary() {
 	let displayedProjects = [...projects];
 
 	if (selectedProject) {
-		displayedProjects = displayedProjects.filter(project => project.id === selectedProject);
+		displayedProjects = displayedProjects.filter(project => project._id === selectedProject);
 	}
 
 	if (selectedManager) {
@@ -29,18 +29,18 @@ function ProjectSummary() {
 
 	const getProjects = () =>
 		projects.map(project => ({
-			key: project.id,
+			key: project._id,
 			label: project.title,
-			onClick: () => setSelectedProject(project.id)
+			onClick: () => setSelectedProject(project._id)
 		}));
 
 	const getManagers = () =>
 		team.map(user => {
 			if (user.role === 'manager') {
 				return {
-					key: user.id,
+					key: user._id,
 					label: user.name,
-					onClick: () => setSelectedManager(user.id)
+					onClick: () => setSelectedManager(user._id)
 				};
 			}
 		});
@@ -55,7 +55,7 @@ function ProjectSummary() {
 						trigger={['click']}
 					>
 						<span className={styles.dropdownElement}>
-							{selectedProject ? projects.find(p => p.id === selectedProject)?.title : t('projSummary.labels.proj')}
+							{selectedProject ? projects.find(p => p._id === selectedProject)?.title : t('projSummary.labels.proj')}
 							{selectedProject === null ?
 							<i className="fa-solid fa-angle-down"></i> :
 							<i className="fa-solid fa-xmark" onClick={() => setSelectedProject(null)}></i>}
@@ -66,7 +66,7 @@ function ProjectSummary() {
 						trigger={['click']}
 					>
 						<span className={styles.dropdownElement}>
-							{selectedManager ? team.find(m => m.id === selectedManager)?.name : t('projSummary.labels.manager')}
+							{selectedManager ? team.find(m => m._id === selectedManager)?.name : t('projSummary.labels.manager')}
 							{selectedManager === null ?
 							<i className="fa-solid fa-angle-down"></i> :
 							<i className="fa-solid fa-xmark" onClick={() => setSelectedManager(null)}></i>}
@@ -100,7 +100,7 @@ function ProjectSummary() {
 							<React.Fragment key={index}>
 								<tr>
 									<td>{project.title}</td>
-									<td>{team.find(member => member.id === project.managerId)?.name || 'Unknown'}</td>
+									<td>{team.find(member => member._id === project.managerId)?.name || 'Unknown'}</td>
 									<td>{getDeadlineLabel(project.deadlineAmount, t)}</td>
 									<td>
 										{project.progress}%

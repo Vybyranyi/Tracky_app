@@ -9,7 +9,7 @@ import HelmetComponent from "../../Components/Helmet/HelmetComponent";
 import { useTranslation } from "react-i18next";
 
 export default function EditProject() {
-  const { id } = useParams();
+  const { _id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -21,11 +21,11 @@ export default function EditProject() {
     dispatch(fetchUsers());
   }, [dispatch, users.length]);
 
-  const project = allProjects.find((p) => p.id === +id);
+  const project = allProjects.find((p) => p._id === +_id);
 
   const handleEdit = (data) => {
     dispatch(updateProject(data));
-    navigate(`/allprojects/${data.id}`);
+    navigate(`/allprojects/${data._id}`);
   };
 
   if (!allProjects.length || !project) return <p>Loading...</p>;

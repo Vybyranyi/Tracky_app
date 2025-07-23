@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function DetailProjectPage() {
 
-	const {id} = useParams();
+	const { id } = useParams();
 
 	// const projectData = {
 	// 	deadline: "1 Hour",
@@ -22,7 +22,7 @@ function DetailProjectPage() {
 	// };
 
 	return (
-					<DetailProject id={id}/>
+					<DetailProject _id={id}/>
 				);
 }
 

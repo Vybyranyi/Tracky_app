@@ -26,13 +26,12 @@ export const fetchProjects = createAsyncThunk(
 				  	projects.map(project => ({
 						...project,
 						deadlineAmount: calculateDaysLeft(project.deadline),
-						progress: calculateProjectProgress(tasks, project.id),
+						progress: calculateProjectProgress(tasks, project._id),
 				  	}))
 				])
 			  );
 		
 			return projectsByCategory;
-			// return data;
 		} catch (err) {
 			return rejectWithValue(err.message || 'Network error');
 		}
@@ -90,10 +89,10 @@ const projectsSlice = createSlice({
 			// return state;
 		},
 		deleteProject: (state, action) => {
-			const id = action.payload;
+			const _id = action.payload;
 
 			const entries = Object.entries(state.projectsCategories);
-			state.projectsCategories = Object.fromEntries(entries.map(([key, arr]) => [key, arr.filter(item => item.id != id)]));
+			state.projectsCategories = Object.fromEntries(entries.map(([key, arr]) => [key, arr.filter(item => item._id != _id)]));
 
 			state.projectsList = Object.values(state.projectsCategories).flat();
 

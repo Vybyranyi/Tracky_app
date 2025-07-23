@@ -35,7 +35,7 @@ export default function TasksTable({ tasks, isProjectsTasks = false }) {
     if (!isProjectsTasks) {
         displayedTasks = displayedTasks.map(task => {
             const taskId = task.projectId;
-            const project = projects.find(proj => proj.id == taskId);
+            const project = projects.find(proj => proj._id == taskId);
 
             const projectName = project ? project.title : 'Unknown';
             const newTask = { ...task, projectName };
@@ -95,7 +95,7 @@ export default function TasksTable({ tasks, isProjectsTasks = false }) {
             ),
             onClick: (e) => {
                 e.domEvent.stopPropagation();
-                dispatch(addEditTask(task.id));
+                dispatch(addEditTask(task._id));
                 navigate('/createtask');
             },
         },
@@ -108,7 +108,7 @@ export default function TasksTable({ tasks, isProjectsTasks = false }) {
             ),
             onClick: (e) => {
                 e.domEvent.stopPropagation();
-                dispatch(deleteTask(task.id));
+                dispatch(deleteTask(task._id));
             },
         },
     ];
@@ -121,7 +121,7 @@ export default function TasksTable({ tasks, isProjectsTasks = false }) {
             ),
             onClick: (e) => {
                 e.domEvent.stopPropagation();
-                dispatch(changeTaskStatus({ id: task.id, status: 'Approved' }))
+                dispatch(changeTaskStatus({ _id: task._id, status: 'Approved' }))
             }
         },
         {
@@ -131,7 +131,7 @@ export default function TasksTable({ tasks, isProjectsTasks = false }) {
             ),
             onClick: (e) => {
                 e.domEvent.stopPropagation();
-                dispatch(changeTaskStatus({ id: task.id, status: 'Re work' }))
+                dispatch(changeTaskStatus({ _id: task._id, status: 'Re work' }))
             }
         },
         {
@@ -141,7 +141,7 @@ export default function TasksTable({ tasks, isProjectsTasks = false }) {
             ),
             onClick: (e) => {
                 e.domEvent.stopPropagation();
-                dispatch(changeTaskStatus({ id: task.id, status: 'Pending' }))
+                dispatch(changeTaskStatus({ _id: task._id, status: 'Pending' }))
             }
         },
         {
@@ -151,7 +151,7 @@ export default function TasksTable({ tasks, isProjectsTasks = false }) {
             ),
             onClick: (e) => {
                 e.domEvent.stopPropagation();
-                dispatch(changeTaskStatus({ id: task.id, status: 'In progress' }))
+                dispatch(changeTaskStatus({ _id: task._id, status: 'In progress' }))
             }
         },
     ]
@@ -215,9 +215,9 @@ export default function TasksTable({ tasks, isProjectsTasks = false }) {
                             <React.Fragment key={index}>
                                 <tr
                                     className={styles.tableRow}
-                                    onClick={() => dispatch(setExtendetRow(task.id))}
+                                    onClick={() => dispatch(setExtendetRow(task._id))}
                                     style={
-                                        expandedRows.length !== 0 && !expandedRows.includes(task.id)
+                                        expandedRows.length !== 0 && !expandedRows.includes(task._id)
                                             ? { backgroundColor: 'transparent' }
                                             : {}
                                     }
@@ -268,7 +268,7 @@ export default function TasksTable({ tasks, isProjectsTasks = false }) {
 
                                     </td>
                                 </tr>
-                                {expandedRows.includes(task.id) && (
+                                {expandedRows.includes(task._id) && (
                                     <tr className={styles.accordionRow}>
                                         <td colSpan={6}>
                                             <p className={styles.accordionContent}>{task.description}</p>
