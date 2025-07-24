@@ -17,18 +17,30 @@ export default function EditProject() {
   const allProjects = useSelector((state) => state.projects.projectsList);
   const { users } = useSelector((state) => state.users);
 
-  useEffect(() => {
+useEffect(() => {
+  if (!allProjects.length) {
+    dispatch(fetchProjects());
+  }
+  if (!users.length) {
     dispatch(fetchUsers());
-  }, [dispatch, users.length]);
+  }
+}, [dispatch, allProjects.length, users.length]);
 
-  const project = allProjects.find((p) => p._id === +_id);
+
+useEffect(() => {
+  console.log('projectId from URL:', _id);
+  console.log('project list IDs:', allProjects.map(p => p._id));
+}, [allProjects, _id]);
+
+
+  const project = allProjects.find((p) => p._id === _id);
 
   const handleEdit = (data) => {
-    dispatch(updateProject(data));
-    navigate(`/allprojects/${data._id}`);
+    dispatch(updateProject({ id: data._id, project: data }));
+    navigate(`/allprojects`);
   };
 
-  if (!allProjects.length || !project) return <p>Loading...</p>;
+  if (!project) return <p>{'loading'}</p>;
 
   return (
     <div>

@@ -75,7 +75,7 @@ function App() {
             <Route path='/allprojects/:id' element={<DetailProjectPage />} />
             <Route path='/team' element={<TeamPage />} />
             <Route path='/settings' element={<SettingsForm />} />
-            <Route path="/projects/edit/:id" element={<EditProject />} />
+            <Route path="/projects/edit/:_id" element={<EditProject />} />
           </Routes>
         </div>
       </div>

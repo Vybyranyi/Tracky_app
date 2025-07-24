@@ -13,7 +13,7 @@
 
 }
 
-.wrapper{
+.wrapper {
 	max-width: 328px;
 	position: relative;
 	border-radius: 10px;
@@ -73,10 +73,15 @@
 }
 
 
-.dropdown{
+.dropdown {
 	position: absolute;
 	top: 155px;
-	right: 24px;
-
+	right: 14px;
 }
 
+.dropdownButton {
+	width: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

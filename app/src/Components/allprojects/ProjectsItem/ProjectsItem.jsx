@@ -69,7 +69,7 @@ function ProjectsItem({ obj }) {
 		</Link>
 		<div className={styles.dropdown}>
 			<Dropdown menu={{ items: dropdownMenu }} trigger={['click']}>
-				<button>
+				<button className={styles.dropdownButton}>
 				<i className={`${styles.icon} fa-solid fa-ellipsis-vertical`}></i>
 				</button>
 			</Dropdown>

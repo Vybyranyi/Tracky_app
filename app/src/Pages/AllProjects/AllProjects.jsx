@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProjectsNavigation from '../../Components/allprojects/ProjectsNavigation/ProjectsNavigation';
 import styles from './AllProjects.module.scss';
 import ProjectsSlider from '../../Components/allprojects/ProjectsSlider/ProjectsSlider';
@@ -7,15 +7,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { selectProjectsEnriched } from '../../store/selectors/selectors';
 import BigButton from '../../Components/BigButton/BigButton';
-import { filterProjects } from '../../store/projects/projectsSlice';
+import { fetchProjects, filterProjects } from '../../store/projects/projectsSlice';
 import HelmetComponent from '../../Components/Helmet/HelmetComponent';
 
 function AllProjects() {
+
+
+
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
 
+	useEffect(() => {
+		dispatch(fetchProjects());
+	}, []);
+
 	const { categories: projectsCategories } = useSelector(selectProjectsEnriched);
-	const {list: projectsList} = useSelector(selectProjectsEnriched);
+	const { list: projectsList } = useSelector(selectProjectsEnriched);
 
 
 	const searchValue = useSelector(state => state.projects.searchValue);
