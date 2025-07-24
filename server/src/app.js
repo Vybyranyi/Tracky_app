@@ -75,6 +75,15 @@ app.put('/api/tasks/:id', authMiddleware, async (req, res) => {
   }
 });
 
+app.put('/api/tasks/changeStatus/:id', authMiddleware, async (req, res) => {
+  try {
+    const changeStatusTask = await Task.findByIdAndUpdate(req.params.id, { status: req.body.status }, { new: true });
+    res.json(changeStatusTask);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 app.delete('/api/tasks/:id', authMiddleware, async (req, res) => {
   try {
     await Task.findByIdAndDelete(req.params.id);
