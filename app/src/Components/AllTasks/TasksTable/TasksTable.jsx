@@ -1,8 +1,8 @@
-import React, { } from 'react';
+import React, { useEffect } from 'react';
 import styles from './TasksTable.module.scss';
 import { Empty, Dropdown } from "antd";
 import StatusButton from '../StatusButton/StatusButton';
-import { toggleSort, deleteTask, changeTaskStatus, setExtendetRow, filterTasks, addEditTask } from '../../../store/Tasks/TasksSlice';
+import { toggleSort, deleteTask, changeTaskStatus, setExtendetRow, filterTasks, addEditTask, fetchTasks } from '../../../store/Tasks/TasksSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { t } from 'i18next';
 import BigButton from '../../BigButton/BigButton';
@@ -13,6 +13,10 @@ import { useNavigate } from 'react-router-dom';
 export default function TasksTable({ tasks, isProjectsTasks = false }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        dispatch(fetchTasks());
+    }, []);
 
     const sortField = useSelector((state) => state.tasks.sortField);
     const sortDirection = useSelector((state) => state.tasks.sortDirection);

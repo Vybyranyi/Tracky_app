@@ -10,31 +10,124 @@ const initialState = {
   searchDate: '',
   editTask: null,
   filtred: {
-		isFiltred: false,
-		filtredBy: null
-	}
+    isFiltred: false,
+    filtredBy: null
+  }
 
 };
 
 export const fetchTasks = createAsyncThunk('tasks/fetch', async (_, { getState, rejectWithValue }) => {
-    try {
-        const token = getState().auth.token;
-        const res = await fetch('http://localhost:3000/api/tasks', {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
+  try {
+    const token = getState().auth.token;
+    const res = await fetch('http://localhost:3000/api/tasks', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
 
-        if (!res.ok) {
-            const data = await res.json();
-            return rejectWithValue(data.message || 'Error fetching tasks');
-        }
-
-        const data = await res.json();
-        return data;
-    } catch (err) {
-        return rejectWithValue(err.message || 'Network error');
+    if (!res.ok) {
+      const data = await res.json();
+      return rejectWithValue(data.message || 'Error fetching tasks');
     }
+
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    return rejectWithValue(err.message || 'Network error');
+  }
 }
 );
+
+export const addTask = createAsyncThunk('tasks/add', async (task, { getState, rejectWithValue }) => {
+  try {
+    const token = getState().auth.token;
+    const res = await fetch('http://localhost:3000/api/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(task)
+    });
+
+    if (!res.ok) {
+      const data = await res.json();
+      return rejectWithValue(data.message || 'Error adding task');
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    return rejectWithValue(err.message || 'Network error');
+  }
+});
+
+export const saveEditedTask = createAsyncThunk('tasks/saveEdited', async (task, { getState, rejectWithValue }) => {
+  try {
+    const token = getState().auth.token;
+    const res = await fetch(`http://localhost:3000/api/tasks/${task._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(task)
+    });
+
+    if (!res.ok) {
+      const data = await res.json();
+      return rejectWithValue(data.message || 'Error saving task');
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    return rejectWithValue(err.message || 'Network error');
+  }
+});
+
+export const changeTaskStatus = createAsyncThunk('tasks/changeStatus', async ({ _id, status }, { getState, rejectWithValue }) => {
+  try {
+    const token = getState().auth.token;
+    const res = await fetch(`http://localhost:3000/api/tasks/changeStatus/${_id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ status })
+    });
+
+    if (!res.ok) {
+      const data = await res.json();
+      return rejectWithValue(data.message || 'Error changing task status');
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    return rejectWithValue(err.message || 'Network error');
+  }
+});
+
+export const deleteTask = createAsyncThunk('tasks/delete', async (taskId, { getState, rejectWithValue }) => {
+  try {
+    const token = getState().auth.token;
+    const res = await fetch(`http://localhost:3000/api/tasks/${taskId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (!res.ok) {
+      const data = await res.json();
+      return rejectWithValue(data.message || 'Error deleting task');
+    }
+
+    return taskId;
+  } catch (err) {
+    return rejectWithValue(err.message || 'Network error');
+  }
+});
 
 const tasksSlice = createSlice({
   name: 'tasks',
@@ -58,11 +151,6 @@ const tasksSlice = createSlice({
         state.sortDirection = null;
       }
     },
-    changeTaskStatus(state, action) {
-      const { _id, status } = action.payload;
-      const task = state.tasks.find(task => task._id === _id);
-      task.status = status;
-    },
     setExtendetRow(state, action) {
       const _id = action.payload;
       const index = state.expandedRows.indexOf(_id);
@@ -80,37 +168,21 @@ const tasksSlice = createSlice({
         state.searchDate = date;
       }
     },
-    addTask(state, action) {
-      const newTask = action.payload;
-      state.tasks.push(newTask);
-    },
     addEditTask(state, action) {
       // записквати в editTask 
       const taskId = action.payload;
       const task = state.tasks.find(t => t._id === taskId);
       state.editTask = task ? { ...task } : null;
     },
-    saveEditedTask(state, action) {
-      // зберігаєш відредагований такс 
-      const editedTask = action.payload;
-      const index = state.tasks.findIndex(t => t._id === editedTask._id);
-      if (index !== -1) {
-        state.tasks[index] = editedTask;
+    filterTasks: (state, action) => {
+      if (action.payload) {
+        state.filtred.isFiltred = true;
+      } else {
+        state.filtred.isFiltred = false;
       }
-      state.editTask = null;
-    },
-    deleteTask(state, action) {
-      state.tasks = state.tasks.filter(item => item._id !== action.payload);
-    },
-    filterTasks: (state, action) =>{
-			if(action.payload){
-				state.filtred.isFiltred = true;
-			}else{
-				state.filtred.isFiltred = false;
-			}
-			state.filtred.filtredBy = action.payload;
-		}
-    
+      state.filtred.filtredBy = action.payload;
+    }
+
   },
   extraReducers: builder => {
     builder
@@ -120,16 +192,33 @@ const tasksSlice = createSlice({
       .addCase(fetchTasks.rejected, (state, action) => {
         console.error('Помилка при завантаженні задач:', action.payload);
       });
+    builder
+      .addCase(addTask.fulfilled, (state, action) => {
+        state.tasks.push(action.payload);
+      })
+      .addCase(addTask.rejected, (state, action) => {
+        console.error('Помилка при додаванні задачі:', action.payload);
+      });
+    builder
+      // ...existing cases...
+      .addCase(changeTaskStatus.fulfilled, (state, action) => {
+        const updatedTask = action.payload;
+        const idx = state.tasks.findIndex(t => t._id === updatedTask._id);
+        if (idx !== -1) {
+          state.tasks[idx] = updatedTask;
+        }
+      })
+      .addCase(changeTaskStatus.rejected, (state, action) => {
+        console.error('Помилка при зміні статусу задачі:', action.payload);
+      });
+    builder
+      .addCase(deleteTask.fulfilled, (state, action) => {
+        state.tasks = state.tasks.filter(task => task._id !== action.payload);
+      })
+      .addCase(deleteTask.rejected, (state, action) => {
+        console.error('Помилка при видаленні задачі:', action.payload);
+      });
   }
-  // extraReducers: builder => {
-  //   builder
-  //     .addCase(fetchTasks.fulfilled, (state, action) => {
-  //       state.tasks = action.payload;
-  //     })
-  //     .addCase(fetchTasks.rejected, (state, action) => {
-  //       console.error('Помилка при завантаженні задач:', action.payload);
-  //     });
-  // }
 })
 
 
@@ -137,14 +226,10 @@ export const {
   setSearchValue,
   setActiveStatus,
   toggleSort,
-  changeTaskStatus,
   setExtendetRow,
-  deleteTask,
   searchByDate,
   addEditTask,
-  saveEditedTask,
   filterTasks,
-  addTask,
 } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
