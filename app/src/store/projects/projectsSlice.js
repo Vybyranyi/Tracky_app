@@ -99,7 +99,7 @@ export const deleteProject = createAsyncThunk(
 const initialState = {
 	projectsList: [],
 	projectsCategories: {},
-	shownBy: 'category',
+	shownBy: 'list',
 	sortType: null,
 	sortDirection: null,
 	searchValue: '',

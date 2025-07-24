@@ -14,7 +14,7 @@
 	margin-bottom: 18px;
 	display: flex;
 	align-items: center;
-	max-width: 1124px;		
+	max-width: 1124px;
 	justify-content: space-between;
 }
 
@@ -22,14 +22,14 @@
 	display: flex;
 	align-items: center;
 	column-gap: 10px;
-	
-	button{
+
+	button {
 		color: var(--Black);
 	}
-	
+
 }
 
-.slick-slide > div {
+.slick-slide>div {
 	padding: 0 12px;
 	box-sizing: border-box;
 }
@@ -39,11 +39,15 @@
 }
 
 
-.icon{
+.icon {
 	color: var(--Secondary-400);
 }
 
-.navIcon{
+.navIcon {
 	color: var(--Secondary-300);
 }
 
+.prev,
+.next {
+	cursor: pointer;
+}

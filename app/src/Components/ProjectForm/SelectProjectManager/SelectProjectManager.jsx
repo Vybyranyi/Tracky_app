@@ -25,7 +25,7 @@ export default function SelectProjectManager({ users, value, onChange }) {
         {managers.map(user => (
           <Option key={user._id} value={user._id}>
             <div className={styles.option}>
-              <Avatar src={`team/${user.img}.png`} size="small" />
+              <Avatar src={`/team/${user.img}.png`} size="small" />
               <span className={styles.name}>{user.name}</span>
             </div>
           </Option>

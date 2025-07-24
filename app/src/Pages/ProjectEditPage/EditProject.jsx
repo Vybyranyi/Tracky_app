@@ -19,19 +19,12 @@ export default function EditProject() {
 
 useEffect(() => {
   if (!allProjects.length) {
-    dispatch(fetchProjects());
+    dispatch(fetchProjects());    
   }
   if (!users.length) {
     dispatch(fetchUsers());
   }
 }, [dispatch, allProjects.length, users.length]);
-
-
-useEffect(() => {
-  console.log('projectId from URL:', _id);
-  console.log('project list IDs:', allProjects.map(p => p._id));
-}, [allProjects, _id]);
-
 
   const project = allProjects.find((p) => p._id === _id);
 
