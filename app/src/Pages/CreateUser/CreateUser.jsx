@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import UserForm from '../../Components/UserForm/UserForm';
+import { addUser, saveEditedUser } from '../../store/Users/usersSlice';
 
 
 export default function CreateUser() {
@@ -25,11 +26,11 @@ export default function CreateUser() {
 
     const handleSubmit = (data) => {
         if (isEdit) {
-            // dispatch(saveEditedUser(data));
+            dispatch(saveEditedUser(data));
             console.log(data);
             navigate('/team');
         } else {
-            // dispatch(addUser(data));
+            dispatch(addUser(data));
             console.log(data);
             navigate('/team');
         }

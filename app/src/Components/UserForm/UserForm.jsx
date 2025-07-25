@@ -32,9 +32,16 @@ export default function UserForm({ initialValues, onSubmit, isEdit }) {
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={(values, { resetForm }) => {
-                    onSubmit(values);
+                    const payload = isEdit
+                        ? values
+                        : {
+                            ...values,
+                            img: '01',
+
+                        };
+                    onSubmit(payload);
                     if (!isEdit) resetForm();
-                }} 
+                }}
                 enableReinitialize
             >
                 {({ values = {}, setFieldValue }) => (
@@ -49,7 +56,7 @@ export default function UserForm({ initialValues, onSubmit, isEdit }) {
                             />
                             <ErrorMessage name="name" component="div" className={styles.error} />
                         </div>
-                        
+
                         <div className={styles.formGroup}>
                             <label htmlFor="job" className={styles.label}>Job</label>
                             <Field
@@ -60,7 +67,7 @@ export default function UserForm({ initialValues, onSubmit, isEdit }) {
                             />
                             <ErrorMessage name="job" component="div" className={styles.error} />
                         </div>
-                        
+
                         <div className={styles.formGroup}>
                             <Field
                                 as="textarea"
@@ -71,7 +78,7 @@ export default function UserForm({ initialValues, onSubmit, isEdit }) {
                             />
                             <ErrorMessage name="desc" component="div" className={styles.error} />
                         </div>
-                        
+
                         <div className={styles.formGroup}>
                             <label htmlFor="role" className={styles.label}>Role</label>
                             <Select
@@ -87,7 +94,7 @@ export default function UserForm({ initialValues, onSubmit, isEdit }) {
                             />
                             <ErrorMessage name="role" component="div" className={styles.error} />
                         </div>
-                        
+
                         <BigButton text={isEdit ? 'Update User' : 'Create User'} style="purple" />
                     </Form>
                 )}

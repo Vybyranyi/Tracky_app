@@ -1,14 +1,16 @@
 import React from 'react';
 import styles from './TeamItem.module.scss';
 import { useTranslation } from 'react-i18next';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {filterProjects} from '../../../store/projects/projectsSlice';
+import { filterProjects } from '../../../store/projects/projectsSlice';
 import { filterTasks } from '../../../store/Tasks/TasksSlice';
+import { Dropdown } from 'antd';
+import { addEditUser, deleteUser } from '../../../store/Users/usersSlice';
 
 
-function TeamItem({obj}) {
-	const {t} = useTranslation();
+function TeamItem({ obj }) {
+	const { t } = useTranslation();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -16,26 +18,53 @@ function TeamItem({obj}) {
 
 	const projects = useSelector(state => state.projects.projectsList);
 	const tasks = useSelector(state => state.tasks.tasks);
-	
 
-	
-	if(obj.role == 'manager'){
+    const getUserOptions = (user) => [
+        {
+            key: 'edit',
+            label: (
+                <span className={styles.dropdownItem}>
+                    <i className="fa-solid fa-pen-to-square"></i> {t("actions.edit")}
+                </span>
+            ),
+            onClick: (e) => {
+                e.domEvent.stopPropagation();
+                dispatch(addEditUser(user._id));
+                navigate('/createuser');
+            },
+        },
+        {
+            key: 'delete',
+            label: (
+                <span className={styles.dropdownItem}>
+                    <i className="fa-solid fa-trash"></i> {t("actions.delete")}
+                </span>
+            ),
+            onClick: (e) => {
+                e.domEvent.stopPropagation();
+                dispatch(deleteUser(user._id));
+                // navigate('/team');
+            },
+        },
+    ];
+
+	if (obj.role == 'manager') {
 		amount = projects.filter(proj => proj.managerId == obj._id).length;
-	} 	else{
+	} else {
 		amount = tasks.filter(task => task.userId == obj._id).length;
 	}
 
 	const handleNavigate = () => {
-		if(obj.role === 'manager'){
+		if (obj.role === 'manager') {
 			dispatch(filterProjects(obj._id));
 			navigate('/allprojects');
-		}else{
+		} else {
 			dispatch(filterTasks(obj._id));
 			navigate('/alltasks')
 		}
-		
+
 	}
-	
+
 
 	return (
 		<div className={styles.card} >
@@ -50,10 +79,25 @@ function TeamItem({obj}) {
 			<div className={styles.desc}>
 				<div className={styles.task} onClick={handleNavigate}>
 					<i className={styles.icon + " fa-regular fa-note-sticky"}></i>
-					<p>{amount || 0} {obj.role === 'manager' ? t("team.proj") :t("team.task")}</p>
+					<p>{amount || 0} {obj.role === 'manager' ? t("team.proj") : t("team.task")}</p>
 				</div>
 				{/* <p className={styles.rating}>{obj.rating} ({obj.reviews} Reviews)</p> */}
 			</div>
+			<Dropdown
+				className={styles.dropdown}
+				menu={{ items: getUserOptions(obj) }}
+				trigger={['click']}
+				getPopupContainer={(triggerNode) => triggerNode.parentNode}
+			>
+				<i
+					className={styles.dropdownIcon + " fa-solid fa-ellipsis-vertical"}
+					// className="fa-solid fa-ellipsis-vertical"
+					onClick={(e) => {
+						e.stopPropagation();
+						e.preventDefault();
+					}}
+				></i>
+			</Dropdown>
 		</div>
 	);
 }
