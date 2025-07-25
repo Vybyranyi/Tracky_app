@@ -64,7 +64,7 @@ export const saveEditedUser = createAsyncThunk(
     try {
       const token = getState().auth.token;
 
-      const res = await fetch(`http://localhost:3000/api/team/${userData.id}`, {
+      const res = await fetch(`http://localhost:3000/api/team/${userData._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ const usersSlice = createSlice({
   reducers: {
     addEditUser(state, action) {
       const userId = action.payload;
-      const user = state.users.find(u => u.id === userId);
+      const user = state.users.find(u => u._id === userId);
       state.editUser = user ? { ...user } : null;
     },
   },
@@ -137,7 +137,7 @@ const usersSlice = createSlice({
       });
     builder
       .addCase(saveEditedUser.fulfilled, (state, action) => {
-        const index = state.users.findIndex(user => user.id === action.payload.id);
+        const index = state.users.findIndex(user => user._id === action.payload.id);
         if (index !== -1) {
           state.users[index] = action.payload;
         }
@@ -148,7 +148,7 @@ const usersSlice = createSlice({
       });
     builder
       .addCase(deleteUser.fulfilled, (state, action) => {
-        state.users = state.users.filter(user => user.id !== action.payload);
+        state.users = state.users.filter(user => user._id !== action.payload);
       })
       .addCase(deleteUser.rejected, (state, action) => {
         console.error('Error deleting user:', action.payload);

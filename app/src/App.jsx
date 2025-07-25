@@ -31,7 +31,10 @@ function App() {
   const dispatch = useDispatch();
 
   const location = useLocation();
-  const isFullHeader = !(location.pathname === '/team' || location.pathname === '/settings');
+  const isFullHeader = !(location.pathname === '/team' ||
+                         location.pathname === '/settings' ||
+                         location.pathname === '/createuser'
+                        );
 
   useAuth();
 

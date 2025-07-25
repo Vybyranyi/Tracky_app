@@ -6,7 +6,7 @@ import TasksTable from '../../Components/AllTasks/TasksTable/TasksTable';
 import TasksSearch from '../../Components/AllTasks/TasksSearch/TasksSearch';
 import StatusButton from '../../Components/AllTasks/StatusButton/StatusButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActiveStatus } from '../../store/Tasks/TasksSlice';
+import { addEditTask, setActiveStatus } from '../../store/Tasks/TasksSlice';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import HelmetComponent from '../../Components/Helmet/HelmetComponent';
@@ -63,7 +63,7 @@ export default function AllTasks() {
             </div>
             <div className={styles.allTasksTitle}>
                 <BigTitle text={activeStatus ? t(`tasks.status.${activeStatus}`) : filtred.isFiltred ? t("tasks.dev") + ': ' + user.name : t("tasks.title") } />
-                <BigButton text={t("tasks.btn")} style="purple" onClick={() => navigate('/createtask')}/>
+                <BigButton text={t("tasks.btn")} style="purple" onClick={() => { navigate('/createtask'); dispatch(addEditTask()) }}/>
             </div>
             <TasksTable  tasks={tasks}/>
         </>

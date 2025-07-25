@@ -5,27 +5,30 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import BigTitle from '../BigTitle/BigTitle';
 import BigButton from '../BigButton/BigButton';
 import { Select } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 export default function UserForm({ initialValues, onSubmit, isEdit }) {
 
+    const { t } = useTranslation();
+
     const validationSchema = Yup.object().shape({
         name: Yup.string()
-            .required('Name is required')
-            .min(2, 'Name must be at least 2 characters long'),
+            .required(t('team.form.requiredname'))
+            .min(2, t('team.form.minname')),
         job: Yup.string()
-            .required('Job is required')
-            .min(2, 'Job must be at least 2 characters long'),
+            .required(t('team.form.requiredjob'))
+            .min(2, t('team.form.minjob')),
         desc: Yup.string()
-            .required('Description is required')
-            .max(300, 'Description cannot exceed 300 characters'),
+            .required(t('team.form.requireddescription'))
+            .max(300, t('team.form.maxdescription')),
         role: Yup.string()
-            .required('Role is required'),
+            .required(t('team.form.requiredrole')),
     });
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.header}>
-                <BigTitle text={isEdit ? 'Edit User' : 'Create User'} />
+                <BigTitle text={isEdit ? t('helmetTitle.edituser') : t('helmetTitle.createuser')} />
             </div>
 
             <Formik
@@ -47,23 +50,23 @@ export default function UserForm({ initialValues, onSubmit, isEdit }) {
                 {({ values = {}, setFieldValue }) => (
                     <Form className={styles.form}>
                         <div className={styles.formGroup}>
-                            <label htmlFor="name" className={styles.label}>User Name</label>
+                            <label htmlFor="name" className={styles.label}>{t('team.form.username')}</label>
                             <Field
                                 type="text"
                                 name="name"
                                 className={styles.input}
-                                placeholder='Enter user name'
+                                placeholder={t('team.form.enterusername')}
                             />
                             <ErrorMessage name="name" component="div" className={styles.error} />
                         </div>
 
                         <div className={styles.formGroup}>
-                            <label htmlFor="job" className={styles.label}>Job</label>
+                            <label htmlFor="job" className={styles.label}>{t('team.form.job')}</label>
                             <Field
                                 type="text"
                                 name="job"
                                 className={styles.input}
-                                placeholder='Enter job title'
+                                placeholder={t('team.form.enterjob')}
                             />
                             <ErrorMessage name="job" component="div" className={styles.error} />
                         </div>
@@ -74,28 +77,28 @@ export default function UserForm({ initialValues, onSubmit, isEdit }) {
                                 name="desc"
                                 rows="4"
                                 className={styles.textarea}
-                                placeholder='Enter a description...'
+                                placeholder={t('team.form.enterdescription')}
                             />
                             <ErrorMessage name="desc" component="div" className={styles.error} />
                         </div>
 
                         <div className={styles.formGroup}>
-                            <label htmlFor="role" className={styles.label}>Role</label>
+                            <label htmlFor="role" className={styles.label}>{t('team.form.role')}</label>
                             <Select
                                 value={values.role || undefined}
-                                placeholder="Select role"
+                                placeholder={t('team.form.selectrole')}
                                 className={styles.customSelect}
                                 onChange={(value) => setFieldValue('role', value)}
                                 options={[
-                                    { value: 'manager', label: 'Manager' },
-                                    { value: 'developer', label: 'Developer' },
+                                    { value: 'manager', label: t('team.manager') },
+                                    { value: 'developer', label: t('team.developer') },
                                 ]}
                                 allowClear
                             />
                             <ErrorMessage name="role" component="div" className={styles.error} />
                         </div>
 
-                        <BigButton text={isEdit ? 'Update User' : 'Create User'} style="purple" />
+                        <BigButton text={isEdit ? t('team.form.updateuser') : t('team.form.createuser')} style="purple" />
                     </Form>
                 )}
             </Formik>

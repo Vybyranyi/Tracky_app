@@ -144,7 +144,27 @@
 	"team": {
 		"task": "Task",
 		"title": "Your Team",
-		"proj": "Projects"
+		"proj": "Projects",
+		"manager": "Manager",
+		"developer": "Developer",
+		"form" : {
+			"username": "Username",
+			"enterusername": "Enter username",
+			"job": "Job",
+			"enterjob": "Enter job title",
+			"enterdescription": "Enter a description...",
+			"role": "Role",
+			"selectrole": "Select role",
+			"requiredname": "Name is required",
+			"minname": "Name must be at least 2 characters long",
+			"requiredjob": "Job title is required",
+			"minjob": "Job title must be at least 2 characters long",
+			"requireddescription": "Description is required",
+			"maxdescription": "Description must be less than 300 characters",
+			"requiredrole": "Role is required",
+			"updateuser": "Update User",
+			"createuser": "Create User"
+		}
 	},
 	"show": "Show All",
 	"statisticTotal": "Total tasks Completed",
@@ -188,6 +208,8 @@
 		"allprojects": "All Projects",
 		"createproject": "Create Project",
 		"editproject": "Edit Project",
+		"createuser": "Create User",
+		"edituser": "Edit User",
 		"team": "Team",
 		"settings": "Settings",
 		"login": "Login"

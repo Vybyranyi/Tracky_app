@@ -11,28 +11,28 @@ import HelmetComponent from '../Helmet/HelmetComponent';
 
 function DetailProject() {
 	const { id } = useParams();
-	const {t} = useTranslation();
+	const { t } = useTranslation();
 	const dispatch = useDispatch();
 
 	const projects = useSelector(state => state.projects.projectsList);
-  	const tasks = useSelector(state => state.tasks.tasks);
-  	const users = useSelector(state => state.users.users);
+	const tasks = useSelector(state => state.tasks.tasks);
+	const users = useSelector(state => state.users.users);
 
-  	const project = projects.find(proj => proj._id == id);
-  	const user = project ? users.find(u => u._id === project.managerId) : null;
+	const project = projects.find(proj => proj._id == id);
+	const user = project ? users.find(u => u._id === project.managerId) : null;
 	const displayedTasks = tasks.filter(task => task.projectId == id);
 
-  	useEffect(() => {
+	useEffect(() => {
 		if (!projects.length) {
-		  	dispatch(fetchProjects());
+			dispatch(fetchProjects());
 		}
 	}, [dispatch, projects.length]);
 
 	if (!projects || projects.length === 0) {
-  		return <p>Loading projects...</p>;
+		return <p>Loading projects...</p>;
 	}
 
-	if(!users || users.length === 0){
+	if (!users || users.length === 0) {
 		return <p>Loading users...</p>;
 	}
 
@@ -41,8 +41,8 @@ function DetailProject() {
 		<div className={styles.wrapper}>
 			<HelmetComponent title={project.title} />
 			<div className={styles.banner}>
-				<img src={`/projects/${project.img}.png`}/>
-			</div>	
+				<img src={`/projects/${project.img}.png`} />
+			</div>
 			<div className={styles.descWrapper}>
 				<h2 className={styles.title}>{project.title}</h2>
 				<div className={styles.projectType}>
@@ -51,12 +51,12 @@ function DetailProject() {
 				<div className={styles.widget}>
 					<p>
 						<i className="fa-solid fa-users" style={{ color: "#54577a" }}></i>
-						{t("projects.labels.manager")} 
-						<img src={`/team/${user.img}.png`} className={styles.user} alt="" />
-						{user.name}
+						{t("projects.labels.manager")}
+						<img src={user?.img ? `/team/${user.img}.png` : '/team/default-user.jpg'} className={styles.user} />
+						{user?.name || "Unknown User"}
 					</p>
 					<p>
-						<i className="fa-regular fa-clock" style={{ color: "#54577a" }}></i>						
+						<i className="fa-regular fa-clock" style={{ color: "#54577a" }}></i>
 						{getDeadlineLabel(project.deadlineAmount, t)}
 					</p>
 				</div>
@@ -68,7 +68,7 @@ function DetailProject() {
 				</div>
 				<div className={styles.listWrapper}>
 					<h3 className={styles.subtitle}>{t("projects.labels.tasks")}</h3>
-					<TaskTable tasks={displayedTasks} isProjectsTasks={true}/>
+					<TaskTable tasks={displayedTasks} isProjectsTasks={true} />
 				</div>
 			</div>
 		</div>

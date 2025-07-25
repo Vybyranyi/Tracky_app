@@ -9,6 +9,7 @@
 	flex-direction: column;
 	row-gap: 24px;
 	background-color: var(--White);
+	position: relative;
 }
 
 .person {
@@ -16,7 +17,7 @@
 	align-items: center;
 	column-gap: 8px;
 
-	img{
+	img {
 		height: 48px;
 		width: 48px;
 	}
@@ -26,7 +27,8 @@
 	margin-bottom: 4px;
 	font-size: 16px;
 	font-weight: 600;
-	line-height: 150%; /* 24px */
+	line-height: 150%;
+	/* 24px */
 	letter-spacing: -0.32px;
 }
 
@@ -43,7 +45,8 @@
 
 	font-size: 14px;
 	font-weight: 500;
-	line-height: 200%; /* 28px */
+	line-height: 200%;
+	/* 28px */
 }
 
 .desc {
@@ -56,19 +59,49 @@
 	column-gap: 8px;
 	align-items: center;
 
-	&:hover{
+	&:hover {
 		color: var(--Projects-blue)
 	}
-	
+
 }
 
-.rating, .task p {
+.rating,
+.task p {
 	font-size: 14px;
 	font-weight: 500;
-	line-height: 150%; /* 21px */
+	line-height: 150%;
+	/* 21px */
 	letter-spacing: -0.28px;
 }
 
-.icon{
+.icon {
 	color: var(--Secondary-400);
+}
+
+.dropdown {
+	position: absolute;
+	right: 18px;
+}
+
+.dropdownIcon {
+	width: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.dropdownItem {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 4px 6px;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--Gray-600);
+
+	&:hover {
+		background-color: var(--Secondary-100);
+	}
 }

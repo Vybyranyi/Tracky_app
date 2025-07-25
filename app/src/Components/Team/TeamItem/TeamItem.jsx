@@ -30,6 +30,7 @@ function TeamItem({ obj }) {
             onClick: (e) => {
                 e.domEvent.stopPropagation();
                 dispatch(addEditUser(user._id));
+				console.log(user._id);
                 navigate('/createuser');
             },
         },
@@ -72,6 +73,7 @@ function TeamItem({ obj }) {
 				<img src={`/team/${obj.img}.png`} alt="" />
 				<div>
 					<h3 className={styles.name}>{obj.name}</h3>
+					{/* <p>{obj.role}</p> */}
 					<p className={styles.job}>{obj.job}</p>
 				</div>
 			</div>

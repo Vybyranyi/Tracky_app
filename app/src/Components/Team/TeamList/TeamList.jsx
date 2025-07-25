@@ -4,7 +4,7 @@ import TeamItem from '../TeamItem/TeamItem';
 import SmallTitle from '../../SmallTitle/SmallTitle';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { fetchUsers } from '../../../store/Users/usersSlice';
+import { fetchUsers, addEditUser } from '../../../store/Users/usersSlice';
 import BigButton from '../../BigButton/BigButton';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ function TeamList(props) {
 		<div className={styles.wrapper}>
 			<div className={styles.usersHeader}>
 				<SmallTitle text={t("team.title")} className={styles.TeamTitle} />
-				<BigButton text='add_user' style="purple" onClick={() => navigate('/createuser')}/>
+				<BigButton text={t("helmetTitle.createuser")} style="purple" onClick={() => {navigate('/createuser'); dispatch(addEditUser())}}/>
 			</div>
 			<div className={styles.list}>
 				{team.map(item => <TeamItem obj={item} key={item.name} />)}

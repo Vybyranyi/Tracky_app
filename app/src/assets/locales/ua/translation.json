@@ -1,10 +1,10 @@
 {
-  "sidebar":{
-	"overview": "Огляд",
-	"projects": "Проєкти",
-	"tasks": "Завдання",
-	"yourTeam": "Ваша команда",
-	"settings": "Налаштування"
+  "sidebar": {
+    "overview": "Огляд",
+    "projects": "Проєкти",
+    "tasks": "Завдання",
+    "yourTeam": "Ваша команда",
+    "settings": "Налаштування"
   },
   "tabs": {
     "all": "Усі",
@@ -12,21 +12,21 @@
     "pending": "В очікуванні",
     "completed": "Завершені"
   },
-  "header":{
-	  "greeting": "Привіт!",
-	  "taskReminder": "Давай закінчимо твоє завдання сьогодні!",
+  "header": {
+    "greeting": "Привіт!",
+    "taskReminder": "Давай закінчимо твоє завдання сьогодні!",
     "logout": "вийти"
   },
-  "settings":{
+  "settings": {
     "themeLabel": "Тема",
     "dark": "Темна",
     "light": "Світла",
     "language": "Мова"
   },
-  	"actions": {
-	   "edit": "Редагувати",
-      "delete": "Видалити"
-    },
+  "actions": {
+    "edit": "Редагувати",
+    "delete": "Видалити"
+  },
   "projects": {
     "actions": {
       "new": "Новий проєкт",
@@ -43,27 +43,27 @@
       "deadline": "Дедлайн",
       "progress": "Прогрес"
     },
-	"deadline": {
-    "left": "залишилось",
-		"days": "дні",
-		"day": "день",
-		"hour": "година",
-		"hours": "години",
-    "overdue": "Термін минув",
-    "today": "Дедлайн сьогодні"
+    "deadline": {
+      "left": "залишилось",
+      "days": "дні",
+      "day": "день",
+      "hour": "година",
+      "hours": "години",
+      "overdue": "Термін минув",
+      "today": "Дедлайн сьогодні"
     },
-	"labels": {
-    "progress": "Прогрес",
-	  "manager": "Менеджер проекту: ",
-	  "desc": "Опис",
-	  "tasks": "Завдання"
+    "labels": {
+      "progress": "Прогрес",
+      "manager": "Менеджер проекту: ",
+      "desc": "Опис",
+      "tasks": "Завдання"
     },
-	"title": {
+    "title": {
       "newProject": "Новий проєкт",
       "timeLimit": "Часовий ліміт",
       "allProjects": "Всі проєкти"
     },
-	"form": {
+    "form": {
       "editTitle": "Редагувати проєкт",
       "createTitle": "Створити проєкт",
       "saveButton": "Зберегти проєкт",
@@ -73,7 +73,7 @@
       "descriptionPlaceholder": "Введіть опис...",
       "deadline": "Дедлайн проєкту",
       "manager": "Менеджер проєкту",
-			"managerPlaceholder": "Оберіть менеджера проєкту",
+      "managerPlaceholder": "Оберіть менеджера проєкту",
       "validation": {
         "title": {
           "required": "Назва проєкту обов’язкова",
@@ -93,35 +93,34 @@
   },
   "tasks": {
     "status": {
-        "Approved": "Схвалено",
-        "Re work": "Перероблюється",
-        "Pending": "Очікується",
-        "In progress": "В роботі",
-        "Completed": "Виконано"
-      },
+      "Approved": "Схвалено",
+      "Re work": "Перероблюється",
+      "Pending": "Очікується",
+      "In progress": "В роботі",
+      "Completed": "Виконано"
+    },
     "search": "Пошук завдання",
     "table": {
-        "taskName": "Назва завдання",
-        "taskCreated": "Дата створення",
-        "duoDate": "Термін",
-        "project": "Проєкт",
-        "status": "Статус"
-      },
+      "taskName": "Назва завдання",
+      "taskCreated": "Дата створення",
+      "duoDate": "Термін",
+      "project": "Проєкт",
+      "status": "Статус"
+    },
     "title": "Всі Завдання",
     "btn": "Нове Завдання",
     "pendingToday": "Рецензії, що очікують сьогодні",
     "form": {
-        "createTitle": "Створити завдання",
-        "projectName": "Назва завдання",
-        "descriptionPlaceholder": "Введіть опис...",
-        "deadline": "Дедлайн завдання",
-        "datePlaceholder": "дд.мм.рррр",
-
-        "projectPlaceholder": "Оберіть проєкт",
-        "saveButton": "Зберегти завдання",
-        "createButton": "Створити завдання",
-        "namePlaceholder": "Введіть назву завдання",
-        "selectDev": "Оберіть розробника"
+      "createTitle": "Створити завдання",
+      "projectName": "Назва завдання",
+      "descriptionPlaceholder": "Введіть опис...",
+      "deadline": "Дедлайн завдання",
+      "datePlaceholder": "дд.мм.рррр",
+      "projectPlaceholder": "Оберіть проєкт",
+      "saveButton": "Зберегти завдання",
+      "createButton": "Створити завдання",
+      "namePlaceholder": "Введіть назву завдання",
+      "selectDev": "Оберіть розробника"
     },
     "dev": "Розробник",
     "validation": {
@@ -143,13 +142,31 @@
       }
     }
   },
-  "team":{
+  "team": {
     "task": "Завдань",
     "title": "Твоя Команда",
-    "proj": "Проекти"
+    "proj": "Проекти",
+    "manager": "Менеджер",
+		"developer": "Розробник",
+		"form" : {
+			"username": "Ім’я користувача",
+			"enterusername": "Введіть ім’я користувача",
+			"job": "Посада",
+			"enterjob": "Введіть назву посади",
+			"enterdescription": "Введіть опис...",
+			"role": "Роль",
+			"selectrole": "Оберіть роль",
+			"requiredname": "Ім’я обов’язкове",
+			"minname": "Ім’я повинно містити щонайменше 2 символи",
+			"requiredjob": "Назва посади обов’язкова",
+			"minjob": "Назва посади повинна містити щонайменше 2 символи",
+			"requireddescription": "Опис обов’язковий",
+			"maxdescription": "Опис повинен містити менше 300 символів",
+			"requiredrole": "Роль обов’язкова"
+		}
   },
-	"statisticTotal": "Виконано завданнь",
-	"show": "Показати всі",
+  "statisticTotal": "Виконано завданнь",
+  "show": "Показати всі",
   "projSummary": {
     "name": "Назва",
     "manager": "Менеджер проєкту",
@@ -157,7 +174,7 @@
     "progress": "Прогрес",
     "labels": {
       "proj": "Проект",
-      "manager":"Менеджер проєкту"
+      "manager": "Менеджер проєкту"
     }
   },
   "auth": {
@@ -182,17 +199,18 @@
       }
     }
   },
-	"helmetTitle": {
-		"overview": "Огляд",
-		"alltasks": "Всі завдання",
-		"createtask": "Створити завдання",
-		"edittask": "Редагувати завдання",
-		"allprojects": "Всі проєкти",
-		"createproject": "Створити проєкт",
-		"editproject": "Редагувати проєкт",
-		"team": "Команда",
-		"settings": "Налаштування",
-		"login": "Вхід"
-	}
-  
+  "helmetTitle": {
+    "overview": "Огляд",
+    "alltasks": "Всі завдання",
+    "createtask": "Створити завдання",
+    "edittask": "Редагувати завдання",
+    "allprojects": "Всі проєкти",
+    "createproject": "Створити проєкт",
+    "editproject": "Редагувати проєкт",
+    "createuser": "Створити користувача",
+    "edituser": "Редагувати користувача",
+    "team": "Команда",
+    "settings": "Налаштування",
+    "login": "Вхід"
+  }
 }
