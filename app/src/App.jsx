@@ -21,6 +21,7 @@ import { fetchUsers } from "./store/Users/usersSlice";
 import { fetchProjects } from "./store/projects/projectsSlice";
 import EditProject from "./Pages/ProjectEditPage/EditProject";
 import { useAuth } from "./utils/useAuth";
+import CreateUser from "./Pages/CreateUser/CreateUser";
 
 
 function App() {
@@ -76,6 +77,7 @@ function App() {
             <Route path='/team' element={<TeamPage />} />
             <Route path='/settings' element={<SettingsForm />} />
             <Route path="/projects/edit/:_id" element={<EditProject />} />
+            <Route path="/test" element={<CreateUser />} />
           </Routes>
         </div>
       </div>
