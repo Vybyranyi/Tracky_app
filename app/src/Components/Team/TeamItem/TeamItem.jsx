@@ -7,6 +7,7 @@ import { filterProjects } from '../../../store/projects/projectsSlice';
 import { filterTasks } from '../../../store/Tasks/TasksSlice';
 import { Dropdown } from 'antd';
 import { addEditUser, deleteUser } from '../../../store/Users/usersSlice';
+import defaultPhoto from '../../../../public/team/default-user.jpg';
 
 
 function TeamItem({ obj }) {
@@ -70,7 +71,7 @@ function TeamItem({ obj }) {
 	return (
 		<div className={styles.card} >
 			<div className={styles.person}>
-				<img src={`/team/${obj.img}.png`} alt="" />
+				<img src={obj.img ? obj.img : defaultPhoto} alt="" />
 				<div>
 					<h3 className={styles.name}>{obj.name}</h3>
 					{/* <p>{obj.role}</p> */}

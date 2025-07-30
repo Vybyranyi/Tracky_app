@@ -6,6 +6,7 @@ import BigTitle from '../BigTitle/BigTitle';
 import BigButton from '../BigButton/BigButton';
 import { Select } from 'antd';
 import { useTranslation } from 'react-i18next';
+import ImageUpload from './ImageUpload/ImageUpload';
 
 export default function UserForm({ initialValues, onSubmit, isEdit }) {
 
@@ -39,7 +40,7 @@ export default function UserForm({ initialValues, onSubmit, isEdit }) {
                         ? values
                         : {
                             ...values,
-                            img: '01',
+                            // img: '01',
 
                         };
                     onSubmit(payload);
@@ -49,6 +50,14 @@ export default function UserForm({ initialValues, onSubmit, isEdit }) {
             >
                 {({ values = {}, setFieldValue }) => (
                     <Form className={styles.form}>
+                        <div className={styles.formGroup}>
+                            <ImageUpload
+                                value={values.img}
+                                onChange={(url) => setFieldValue('img', url)}
+                            />
+                            <ErrorMessage name="img" component="div" className={styles.error} />
+                        </div>
+
                         <div className={styles.formGroup}>
                             <label htmlFor="name" className={styles.label}>{t('team.form.username')}</label>
                             <Field

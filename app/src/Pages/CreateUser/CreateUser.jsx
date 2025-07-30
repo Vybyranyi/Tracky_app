@@ -15,7 +15,7 @@ export default function CreateUser() {
     const { editUser } = useSelector(state => state.users);
 
     const emptyValues = {
-        avatar: null,
+        img: null,
         name: '',
         job: '',
         desc: '',

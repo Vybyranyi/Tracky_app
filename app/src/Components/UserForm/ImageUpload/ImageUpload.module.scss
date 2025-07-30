@@ -1,0 +1,50 @@
+@use '../../../assets/styles/colorVariables.scss' as *;
+
+.imageUploadContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .customFileUpload {
+        display: inline-block;
+        padding: 10px 14px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        border-radius: 8px;
+        border: 1px solid var(--Default-border);
+        background-color: var(--White);
+        color: var(--Gray-500);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+
+        &:active {
+            background-color: #e0e0e0;
+        }
+    }
+
+    .hiddenFileInput {
+        display: none;
+    }
+
+    .imagePreview {
+        margin-top: 15px;
+        border: 1px solid var(--Default-border);
+        border-radius: 8px;
+        padding: 5px;
+        display: inline-block;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        .previewImage {
+            max-width: 150px;
+            height: auto;
+            border-radius: 4px;
+            display: block;
+        }
+    }
+}
