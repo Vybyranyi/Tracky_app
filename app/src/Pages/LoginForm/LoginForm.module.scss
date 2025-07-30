@@ -190,3 +190,17 @@
     color: var(--Error-red);
     margin-bottom: 8px;
 }
+
+.skipButton{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    margin-top: 12px;
+    color: var(--Base-purple);
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

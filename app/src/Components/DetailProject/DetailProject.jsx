@@ -7,6 +7,8 @@ import { fetchProjects } from '../../store/projects/projectsSlice';
 import { useTranslation } from 'react-i18next';
 import { getDeadlineLabel } from '../../utils/deadlineUtils';
 import HelmetComponent from '../Helmet/HelmetComponent';
+import defaultPhoto from '../../../public/team/default-user.jpg';
+
 
 
 function DetailProject() {
@@ -52,7 +54,7 @@ function DetailProject() {
 					<p>
 						<i className="fa-solid fa-users" style={{ color: "#54577a" }}></i>
 						{t("projects.labels.manager")}
-						<img src={user?.img ? `/team/${user.img}.png` : '/team/default-user.jpg'} className={styles.user} />
+						<img src={user?.img ? user.img : defaultPhoto} className={styles.user} />
 						{user?.name || "Unknown User"}
 					</p>
 					<p>

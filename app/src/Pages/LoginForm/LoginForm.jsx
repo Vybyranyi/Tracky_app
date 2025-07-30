@@ -9,7 +9,7 @@ import HelmetComponent from '../../Components/Helmet/HelmetComponent';
 
 
 export default function LoginForm() {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     const LoginSchem = Yup.object({
         login: Yup.string()
@@ -36,6 +36,15 @@ export default function LoginForm() {
         setSwowPassword(!swowPassword);
     }
 
+    const skipLogin = async({ resetForm }) => {
+        await dispatch(signInAsync({
+            username: 'admin',
+            password: 'admin',
+            rememberMe: false
+        }));
+        resetForm;
+    }
+
     return (
         <div className={styles.loginContainer}>
             <HelmetComponent title={t('helmetTitle.login')} />
@@ -46,84 +55,86 @@ export default function LoginForm() {
 
                 <Formik
                     initialValues={{
-                    login: '',
-                    password: '',
-                    rememberMe: false
+                        login: '',
+                        password: '',
+                        rememberMe: false
                     }}
                     enableReinitialize={true}
                     validationSchema={LoginSchem}
                     onSubmit={async (values, { resetForm }) => {
-                    await dispatch(signInAsync({
-                        username: values.login,
-                        password: values.password,
-                        rememberMe: values.rememberMe
-                    }));
-                    resetForm();
+                        await dispatch(signInAsync({
+                            username: values.login,
+                            password: values.password,
+                            rememberMe: values.rememberMe
+                        }));
+                        resetForm();
                     }}
                 >
-                {({ isValid, dirty }) => (
-                    <Form className={styles.loginForm}>
-                        <div className={styles.inputBlock}>
-                            <label htmlFor='login' className={styles.smallLable}>
-                                {t('auth.usernameLabel')}
-                            </label>
-                            <Field
-                                id='login'
-                                type="text"
-                                name='login'
-                                placeholder={t('auth.usernamePlaceholder')}
-                                className={styles.formInput}
-                            />
-                            <div className={styles.formErrorWrapper}>
-                                <ErrorMessage name='login' component='p' className={styles.formError} />
-                            </div>
-                        </div>
-
-                        <div className={styles.inputBlock}>
-                            <label htmlFor='password' className={styles.smallLable}>
-                                {t('auth.passwordLabel')}
-                            </label>
-                            <div className={styles.iconContainer}>
+                    {({ isValid, dirty }) => (
+                        <Form className={styles.loginForm}>
+                            <div className={styles.inputBlock}>
+                                <label htmlFor='login' className={styles.smallLable}>
+                                    {t('auth.usernameLabel')}
+                                </label>
                                 <Field
-                                id='password'
-                                type={swowPassword ? 'text' : 'password'}
-                                name='password'
-                                placeholder={t('auth.passwordPlaceholder')}
-                                className={styles.formInput}
+                                    id='login'
+                                    type="text"
+                                    name='login'
+                                    placeholder={t('auth.usernamePlaceholder')}
+                                    className={styles.formInput}
                                 />
-                                <div className={styles.passIcon} onClick={togglePassword}>
-                                {swowPassword
-                                    ? <i className="fa-solid fa-eye"></i>
-                                    : <i className="fa-solid fa-eye-slash"></i>}
+                                <div className={styles.formErrorWrapper}>
+                                    <ErrorMessage name='login' component='p' className={styles.formError} />
                                 </div>
                             </div>
-                            <div className={styles.formErrorWrapper}>
-                                <ErrorMessage name='password' component='p' className={styles.formError} />
+
+                            <div className={styles.inputBlock}>
+                                <label htmlFor='password' className={styles.smallLable}>
+                                    {t('auth.passwordLabel')}
+                                </label>
+                                <div className={styles.iconContainer}>
+                                    <Field
+                                        id='password'
+                                        type={swowPassword ? 'text' : 'password'}
+                                        name='password'
+                                        placeholder={t('auth.passwordPlaceholder')}
+                                        className={styles.formInput}
+                                    />
+                                    <div className={styles.passIcon} onClick={togglePassword}>
+                                        {swowPassword
+                                            ? <i className="fa-solid fa-eye"></i>
+                                            : <i className="fa-solid fa-eye-slash"></i>}
+                                    </div>
+                                </div>
+                                <div className={styles.formErrorWrapper}>
+                                    <ErrorMessage name='password' component='p' className={styles.formError} />
+                                </div>
                             </div>
-                        </div>
 
-                        <div className={styles.rememberMeInput}>
-                            <Field
-                                id='rememberMe'
-                                type="checkbox"
-                                name="rememberMe"
-                                className={styles.rememberMeCheckbox}
-                            />
-                            <label htmlFor="rememberMe" className={styles.rememberMeLable}>
-                                {t('auth.remember')}
-                            </label>
-                        </div>
+                            <div className={styles.rememberMeInput}>
+                                <Field
+                                    id='rememberMe'
+                                    type="checkbox"
+                                    name="rememberMe"
+                                    className={styles.rememberMeCheckbox}
+                                />
+                                <label htmlFor="rememberMe" className={styles.rememberMeLable}>
+                                    {t('auth.remember')}
+                                </label>
+                            </div>
 
-                        <p className={styles.formTotalError}>{error}</p>
+                            <p className={styles.formTotalError}>{error}</p>
 
-                        <button type='submit' className={`${styles.loginButton} ${isValid && dirty ? styles.active : ''}`} disabled={!(isValid && dirty)}>
-                            {t('auth.loginButton')}
-                        </button>
-                    </Form>
-            )}
+                            <button type='submit' className={`${styles.loginButton} ${isValid && dirty ? styles.active : ''}`} disabled={!(isValid && dirty)}>
+                                {t('auth.loginButton')}
+                            </button>
+
+                            <p className={styles.skipButton} onClick={skipLogin}>Skip login</p>
+                        </Form>
+                    )}
                 </Formik>
             </div>
-    </div>
+        </div>
     )
 }
 

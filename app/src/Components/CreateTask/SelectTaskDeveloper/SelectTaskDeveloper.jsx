@@ -2,6 +2,8 @@ import React from 'react';
 import { Select, Avatar } from 'antd';
 import styles from './SelectTaskDeveloper.module.scss';
 import { useTranslation } from 'react-i18next';
+import defaultPhoto from '../../../../public/team/default-user.jpg';
+
 
 const { Option } = Select;
 
@@ -25,7 +27,7 @@ export default function SelectTaskDeveloper({ users, value, onChange }) {
         {developers.map(user => (
           <Option key={user._id} value={user._id}>
             <div className={styles.option}>
-              <Avatar src={`team/${user.img}.png`} size="small" />
+              <Avatar src={user.img ? user.img : defaultPhoto} size="small" />
               <span className={styles.name}>{user.name}</span>
             </div>
           </Option>
