@@ -6,10 +6,15 @@ import Task from '../Models/Task.js';
 import Project from '../Models/Project.js';
 import TeamMember from '../Models/Team.js';
 import mongoose from 'mongoose';
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static('uploads'));
+
 
 mongoose.connect('mongodb+srv://marianEduCnu:5tnghL64l4Vj5uei@cluster0.rqclvuf.mongodb.net/tracky?retryWrites=true&w=majority&appName=Cluster0')
   .then(() => console.log('MongoDB connected'))
@@ -19,6 +24,22 @@ const students = [];
 
 const users = [{ username: 'admin', password: '$2b$10$EBsUXWo2pWNjXFOJehnXcuLZzg/UYx5u3VwZRFyeLbjYXbvPuRJNK' }]
 const SECRET_KEY = 'hillel_fullstack';
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const uploadPath = 'uploads/';
+    fs.mkdirSync(uploadPath, { recursive: true });
+    cb(null, uploadPath);
+  },
+  filename: function (req, file, cb) {
+    const ext = path.extname(file.originalname);
+    const filename = `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
+    cb(null, filename);
+  }
+});
+
+const upload = multer({ storage });
+
 
 app.post('/signin', async (req, res) => {
   const { username, password } = req.body;
@@ -170,12 +191,34 @@ app.put('/api/team/:id', authMiddleware, async (req, res) => {
 
 app.delete('/api/team/:id', authMiddleware, async (req, res) => {
   try {
+    const user = await TeamMember.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    // 🔥 Видаляємо фото з файлової системи
+    if (user.img?.includes('/uploads/')) {
+      const relativePath = user.img.replace(`http://localhost:${PORT}/`, '');
+      const fullPath = path.resolve(relativePath);
+
+      fs.unlink(fullPath, (err) => {
+        if (err) console.error('Image deletion error:', err.message);
+      });
+    }
+
     await TeamMember.findByIdAndDelete(req.params.id);
     res.sendStatus(204);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
+
+
+app.post('/api/upload', authMiddleware, upload.single('file'), (req, res) => {
+  if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
+
+  const fileUrl = `http://localhost:${PORT}/${req.file.path.replace(/\\/g, '/')}`;
+  res.json({ url: fileUrl });
+});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server ready on :${PORT}`));
