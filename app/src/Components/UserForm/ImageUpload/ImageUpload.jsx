@@ -1,7 +1,11 @@
 import React from 'react';
 import styles from './ImageUpload.module.scss';
+import { useTranslation } from 'react-i18next';
 
-const ImageUpload = ({ value, onChange }) => {
+export default function ImageUpload({ value, onChange }) {
+
+  const { t } = useTranslation();
+
   const handleUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -32,9 +36,7 @@ const ImageUpload = ({ value, onChange }) => {
 
   return (
     <div className={styles.imageUploadContainer}>
-      <label htmlFor="file-upload" className={styles.customFileUpload}>
-        Вибрати файл
-      </label>
+      <label htmlFor="file-upload" className={styles.customFileUpload}>{t('team.form.addimg')}</label>
       <input
         id="file-upload"
         type="file"
@@ -50,4 +52,3 @@ const ImageUpload = ({ value, onChange }) => {
   );
 };
 
-export default ImageUpload;

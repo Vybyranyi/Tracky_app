@@ -71,6 +71,8 @@
 			"deadline": "Project Deadline",
 			"manager": "Project Manager",
 			"managerPlaceholder": "Select Project Manager",
+			"imageSelect": "Project Cover",
+			"image": "Select Cover",
 			"validation": {
 				"title": {
 					"required": "Project name is required",
@@ -84,6 +86,9 @@
 				},
 				"manager": {
 					"required": "Manager is required"
+				},
+				"img": {
+					"required": "Image is required"
 				}
 			}
 		}
@@ -147,7 +152,7 @@
 		"proj": "Projects",
 		"manager": "Manager",
 		"developer": "Developer",
-		"form" : {
+		"form": {
 			"username": "Username",
 			"enterusername": "Enter username",
 			"job": "Job",
@@ -163,7 +168,8 @@
 			"maxdescription": "Description must be less than 300 characters",
 			"requiredrole": "Role is required",
 			"updateuser": "Update User",
-			"createuser": "Create User"
+			"createuser": "Create User",
+			"addimg": "Add Image"
 		}
 	},
 	"show": "Show All",
