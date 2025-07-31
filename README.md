@@ -1,4 +1,4 @@
-# Task Manager App
+# Task Manager App (Frontend)
 
 A single-page application for managing tasks and projects with full CRUD functionality.  
 Features user assignment, theme switching (light/dark mode), and internationalization (i18n) support.
