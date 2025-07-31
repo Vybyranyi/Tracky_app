@@ -13,7 +13,7 @@ export default function ImageUpload({ value, onChange }) {
     const formData = new FormData();
     formData.append('file', file);
     try {
-      const res = await fetch('http://localhost:3000/api/upload', {
+      const res = await fetch('https://tracky-server.onrender.com/api/upload', {
         method: 'POST',
         body: formData,
         headers: {

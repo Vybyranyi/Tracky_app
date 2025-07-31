@@ -11,7 +11,7 @@ export const fetchUsers = createAsyncThunk(
     try {
       const token = getState().auth.token;
 
-      const res = await fetch('http://localhost:3000/api/team', {
+      const res = await fetch('https://tracky-server.onrender.com/api/team', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -36,7 +36,7 @@ export const addUser = createAsyncThunk(
     try {
       const token = getState().auth.token;
 
-      const res = await fetch('http://localhost:3000/api/team', {
+      const res = await fetch('https://tracky-server.onrender.com/api/team', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ export const saveEditedUser = createAsyncThunk(
     try {
       const token = getState().auth.token;
 
-      const res = await fetch(`http://localhost:3000/api/team/${userData._id}`, {
+      const res = await fetch(`https://tracky-server.onrender.com/api/team/${userData._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export const deleteUser = createAsyncThunk(
     try {
       const token = getState().auth.token;
 
-      const res = await fetch(`http://localhost:3000/api/team/${userId}`, {
+      const res = await fetch(`https://tracky-server.onrender.com/api/team/${userId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

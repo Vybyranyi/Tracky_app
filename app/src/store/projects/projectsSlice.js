@@ -7,7 +7,7 @@ export const fetchProjects = createAsyncThunk(
 	async (_, { getState, rejectWithValue }) => {
 		try {
 			const token = getState().auth.token;
-			const res = await fetch('http://localhost:3000/api/projects', {
+			const res = await fetch('https://tracky-server.onrender.com/api/projects', {
 				headers: {
 					'Authorization': `Bearer ${token}`
 				}
@@ -42,7 +42,7 @@ export const addProject = createAsyncThunk(
 	'projects/addProject',
 	async (project, { getState, rejectWithValue }) => {
 		const token = getState().auth.token;
-		const res = await fetch('http://localhost:3000/api/projects', {
+		const res = await fetch('https://tracky-server.onrender.com/api/projects', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ export const updateProject = createAsyncThunk(
 	'projects/updateProject',
 	async ({ id, project }, { getState, rejectWithValue }) => {
 		const token = getState().auth.token;
-		const res = await fetch(`http://localhost:3000/api/projects/${id}`, {
+		const res = await fetch(`https://tracky-server.onrender.com/api/projects/${id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export const deleteProject = createAsyncThunk(
 	'projects/deleteProject',
 	async (projectId, { getState, rejectWithValue }) => {
 		const token = getState().auth.token;
-		const res = await fetch(`http://localhost:3000/api/projects/${projectId}`, {
+		const res = await fetch(`https://tracky-server.onrender.com/api/projects/${projectId}`, {
 			method: 'DELETE',
 			headers: {
 				'Authorization': `Bearer ${token}`
