@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 const getInitialToken = () => {
   return localStorage.getItem('token') || sessionStorage.getItem('token') || '';
 };
@@ -32,31 +34,34 @@ const initialState = {
   error: null
 };
 
-export const signInAsync = createAsyncThunk('auth/signin', async ({ username, password, rememberMe }, { rejectWithValue }) => {
-  try {
-    const res = await fetch('https://tracky-server.onrender.com/signin', {
-      method: 'POST',
-      body: JSON.stringify({ username, password }),
-      headers: { 'Content-Type': 'application/json' }
-    });
+export const signInAsync = createAsyncThunk(
+  'auth/signin',
+  async ({ username, password, rememberMe }, { rejectWithValue }) => {
+    try {
+      const res = await fetch(`${API_URL}/signin`, {
+        method: 'POST',
+        body: JSON.stringify({ username, password }),
+        headers: { 'Content-Type': 'application/json' }
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (!res.ok) {
-      return rejectWithValue(data.message || 'Invalid credentials');
+      if (!res.ok) {
+        return rejectWithValue(data.message || 'Invalid credentials');
+      }
+
+      if (rememberMe) {
+        localStorage.setItem('token', data.token);
+      } else {
+        sessionStorage.setItem('token', data.token);
+      }
+
+      return { token: data.token };
+    } catch (err) {
+      return rejectWithValue(err.message || 'Network error');
     }
-
-    if (rememberMe) {
-      localStorage.setItem('token', data.token);
-    } else {
-      sessionStorage.setItem('token', data.token);
-    }
-
-    return { token: data.token };
-  } catch (err) {
-    return rejectWithValue(err.message || 'Network error');
   }
-});
+);
 
 const authSlice = createSlice({
   name: 'auth',
@@ -72,7 +77,7 @@ const authSlice = createSlice({
       state.isAuth = true;
       state.token = action.payload;
     },
-    // Перевіряємо токен вручну
+    // Перевірка токена вручну
     checkToken: (state) => {
       if (state.token && isTokenExpired(state.token)) {
         state.isAuth = false;
@@ -82,7 +87,7 @@ const authSlice = createSlice({
       }
     }
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(signInAsync.fulfilled, (state, action) => {
         state.isAuth = true;

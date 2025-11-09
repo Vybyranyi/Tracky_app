@@ -2,12 +2,14 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { calculateDaysLeft } from '../../utils/calculateDaysLeft';
 import { calculateProjectProgress } from '../../utils/calculateProjectProgress';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 export const fetchProjects = createAsyncThunk(
 	'projects/fetch',
 	async (_, { getState, rejectWithValue }) => {
 		try {
 			const token = getState().auth.token;
-			const res = await fetch('https://tracky-server.onrender.com/api/projects', {
+			const res = await fetch(`${API_URL}/projects`, {
 				headers: {
 					'Authorization': `Bearer ${token}`
 				}
@@ -42,7 +44,7 @@ export const addProject = createAsyncThunk(
 	'projects/addProject',
 	async (project, { getState, rejectWithValue }) => {
 		const token = getState().auth.token;
-		const res = await fetch('https://tracky-server.onrender.com/api/projects', {
+		const res = await fetch(`${API_URL}/projects`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -62,7 +64,7 @@ export const updateProject = createAsyncThunk(
 	'projects/updateProject',
 	async ({ id, project }, { getState, rejectWithValue }) => {
 		const token = getState().auth.token;
-		const res = await fetch(`https://tracky-server.onrender.com/api/projects/${id}`, {
+		const res = await fetch(`${API_URL}/projects/${id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
@@ -82,7 +84,7 @@ export const deleteProject = createAsyncThunk(
 	'projects/deleteProject',
 	async (projectId, { getState, rejectWithValue }) => {
 		const token = getState().auth.token;
-		const res = await fetch(`https://tracky-server.onrender.com/api/projects/${projectId}`, {
+		const res = await fetch(`${API_URL}/projects/${projectId}`, {
 			method: 'DELETE',
 			headers: {
 				'Authorization': `Bearer ${token}`

@@ -19,7 +19,7 @@ const initialState = {
 export const fetchTasks = createAsyncThunk('tasks/fetch', async (_, { getState, rejectWithValue }) => {
   try {
     const token = getState().auth.token;
-    const res = await fetch('https://tracky-server.onrender.com/api/tasks', {
+    const res = await fetch(`${API_URL}/tasks`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
 
@@ -39,7 +39,7 @@ export const fetchTasks = createAsyncThunk('tasks/fetch', async (_, { getState, 
 export const addTask = createAsyncThunk('tasks/add', async (task, { getState, rejectWithValue }) => {
   try {
     const token = getState().auth.token;
-    const res = await fetch('https://tracky-server.onrender.com/api/tasks', {
+    const res = await fetch(`${API_URL}/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ export const addTask = createAsyncThunk('tasks/add', async (task, { getState, re
 export const saveEditedTask = createAsyncThunk('tasks/saveEdited', async (task, { getState, rejectWithValue }) => {
   try {
     const token = getState().auth.token;
-    const res = await fetch(`https://tracky-server.onrender.com/api/tasks/${task._id}`, {
+    const res = await fetch(`${API_URL}/tasks/${task._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ export const saveEditedTask = createAsyncThunk('tasks/saveEdited', async (task, 
 export const changeTaskStatus = createAsyncThunk('tasks/changeStatus', async ({ _id, status }, { getState, rejectWithValue }) => {
   try {
     const token = getState().auth.token;
-    const res = await fetch(`https://tracky-server.onrender.com/api/tasks/changeStatus/${_id}`, {
+    const res = await fetch(`${API_URL}/tasks/changeStatus/${_id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ export const changeTaskStatus = createAsyncThunk('tasks/changeStatus', async ({ 
 export const deleteTask = createAsyncThunk('tasks/delete', async (taskId, { getState, rejectWithValue }) => {
   try {
     const token = getState().auth.token;
-    const res = await fetch(`https://tracky-server.onrender.com/api/tasks/${taskId}`, {
+    const res = await fetch(`${API_URL}/tasks/${taskId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`
