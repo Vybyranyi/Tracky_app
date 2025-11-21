@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { calculateDaysLeft } from '../../utils/calculateDaysLeft';
 import { calculateProjectProgress } from '../../utils/calculateProjectProgress';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_API_URL || 'https://tracky-server.onrender.com';
 
 export const fetchProjects = createAsyncThunk(
 	'projects/fetch',
