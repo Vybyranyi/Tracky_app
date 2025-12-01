@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://tracky-server.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const initialState = {
   tasks: [],

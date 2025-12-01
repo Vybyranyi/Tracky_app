@@ -12,10 +12,9 @@ export default function LoginForm() {
     const { t } = useTranslation();
 
     const LoginSchem = Yup.object({
-        login: Yup.string()
-            .min(5, t('auth.validation.login.min'))
-            .max(20, t('auth.validation.login.max'))
-            .required(t('auth.validation.login.required')),
+        email: Yup.string()
+            .email(t('auth.validation.email.format') || 'Invalid email format')
+            .required(t('auth.validation.email.required') || 'Email is required'),
 
         password: Yup.string()
             .min(5, t('auth.validation.password.min'))
@@ -36,15 +35,6 @@ export default function LoginForm() {
         setSwowPassword(!swowPassword);
     }
 
-    const skipLogin = async({ resetForm }) => {
-        await dispatch(signInAsync({
-            username: 'admin',
-            password: 'admin',
-            rememberMe: false
-        }));
-        resetForm;
-    }
-
     return (
         <div className={styles.loginContainer}>
             <HelmetComponent title={t('helmetTitle.login')} />
@@ -55,7 +45,7 @@ export default function LoginForm() {
 
                 <Formik
                     initialValues={{
-                        login: '',
+                        email: '',
                         password: '',
                         rememberMe: false
                     }}
@@ -63,7 +53,7 @@ export default function LoginForm() {
                     validationSchema={LoginSchem}
                     onSubmit={async (values, { resetForm }) => {
                         await dispatch(signInAsync({
-                            username: values.login,
+                            email: values.email,
                             password: values.password,
                             rememberMe: values.rememberMe
                         }));
@@ -73,18 +63,18 @@ export default function LoginForm() {
                     {({ isValid, dirty }) => (
                         <Form className={styles.loginForm}>
                             <div className={styles.inputBlock}>
-                                <label htmlFor='login' className={styles.smallLable}>
-                                    {t('auth.usernameLabel')}
+                                <label htmlFor='email' className={styles.smallLable}>
+                                    {t('auth.emailLabel') || 'Email'}
                                 </label>
                                 <Field
-                                    id='login'
-                                    type="text"
-                                    name='login'
-                                    placeholder={t('auth.usernamePlaceholder')}
+                                    id='email'
+                                    type="email"
+                                    name='email'
+                                    placeholder={t('auth.emailPlaceholder') || 'Enter your email'}
                                     className={styles.formInput}
                                 />
                                 <div className={styles.formErrorWrapper}>
-                                    <ErrorMessage name='login' component='p' className={styles.formError} />
+                                    <ErrorMessage name='email' component='p' className={styles.formError} />
                                 </div>
                             </div>
 
@@ -128,8 +118,6 @@ export default function LoginForm() {
                             <button type='submit' className={`${styles.loginButton} ${isValid && dirty ? styles.active : ''}`} disabled={!(isValid && dirty)}>
                                 {t('auth.loginButton')}
                             </button>
-
-                            <p className={styles.skipButton} onClick={skipLogin}>Skip login</p>
                         </Form>
                     )}
                 </Formik>

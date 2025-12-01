@@ -22,6 +22,8 @@ import { fetchProjects } from "./store/projects/projectsSlice";
 import EditProject from "./Pages/ProjectEditPage/EditProject";
 import { useAuth } from "./utils/useAuth";
 import CreateUser from "./Pages/CreateUser/CreateUser";
+import AdminRoute from "./Components/AdminRoute/AdminRoute";
+import UserManagement from "./Pages/UserManagement/UserManagement";
 
 
 function App() {
@@ -32,9 +34,9 @@ function App() {
 
   const location = useLocation();
   const isFullHeader = !(location.pathname === '/team' ||
-                         location.pathname === '/settings' ||
-                         location.pathname === '/createuser'
-                        );
+    location.pathname === '/settings' ||
+    location.pathname === '/createuser'
+  );
 
   useAuth();
 
@@ -77,10 +79,15 @@ function App() {
             <Route path='/allprojects' element={<AllProjects />} />
             <Route path='/createproject' element={<CreateProject />} />
             <Route path='/allprojects/:id' element={<DetailProjectPage />} />
-            <Route path='/team' element={<TeamPage />} />
             <Route path='/settings' element={<SettingsForm />} />
             <Route path="/projects/edit/:_id" element={<EditProject />} />
-            <Route path="/createuser" element={<CreateUser />} />
+
+            {/* Admin Routes */}
+            <Route element={<AdminRoute />}>
+              <Route path='/team' element={<TeamPage />} />
+              <Route path="/createuser" element={<CreateUser />} />
+              <Route path="/usermanagement" element={<UserManagement />} />
+            </Route>
           </Routes>
         </div>
       </div>

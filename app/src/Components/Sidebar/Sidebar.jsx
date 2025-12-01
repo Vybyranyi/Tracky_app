@@ -10,8 +10,8 @@ import { useTranslation } from 'react-i18next';
 export default function Sidebar() {
     const navigate = useNavigate();
     const location = useLocation();
-    
-    const {t} = useTranslation();
+
+    const { t } = useTranslation();
 
     const menuItems = [
         { icon: "fa-solid fa-table-cells-large", label: t("sidebar.overview"), link: '/', },
@@ -25,7 +25,7 @@ export default function Sidebar() {
     return (
         <aside className={styles.sidebar}>
             <div className={styles.logo}>
-            <img src={logo} alt="Logo" className={styles.logoImage} />
+                <img src={logo} alt="Logo" className={styles.logoImage} />
             </div>
 
             <nav className={styles.menu}>

@@ -1,0 +1,103 @@
+@use '../../assets/styles/colorVariables.scss' as *;
+
+.container {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--Backgroung);
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+}
+
+.wrapper {
+    background-color: var(--White);
+    padding: 40px;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 30px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
+    color: var(--Gray-500);
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
+.input {
+    background-color: var(--Gray-50);
+    border: 1px solid var(--Gray-200);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: var(--Black);
+    font-size: 16px;
+    transition: all 0.2s;
+
+    &:focus {
+        outline: none;
+        border-color: var(--Base-purple);
+        background-color: var(--White);
+        box-shadow: 0 0 0 4px var(--Brand-100);
+    }
+
+    &::placeholder {
+        color: var(--Gray-400);
+    }
+}
+
+.customSelect {
+    width: 100%;
+
+    :global {
+        .ant-select-selector {
+            background-color: var(--Gray-50) !important;
+            border: 1px solid var(--Gray-200) !important;
+            border-radius: 12px !important;
+            height: 50px !important;
+            display: flex !important;
+            align-items: center !important;
+            color: var(--Black) !important;
+            padding: 0 16px !important;
+        }
+
+        .ant-select-selection-item {
+            color: var(--Black) !important;
+            font-size: 16px !important;
+        }
+
+        .ant-select-focused .ant-select-selector {
+            border-color: var(--Base-purple) !important;
+            box-shadow: 0 0 0 4px var(--Brand-100) !important;
+        }
+    }
+}
+
+.error {
+    color: var(--Error-red);
+    font-size: 13px;
+    margin-left: 4px;
+    margin-top: 4px;
+}
+
+.apiError {
+    color: var(--Error-red);
+    text-align: center;
+    background-color: var(--Error-red-background);
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 500;
+}

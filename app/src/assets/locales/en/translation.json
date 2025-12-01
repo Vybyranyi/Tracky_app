@@ -4,7 +4,9 @@
 		"projects": "Projects",
 		"tasks": "Tasks",
 		"yourTeam": "Your Team",
-		"settings": "Settings"
+		"settings": "Settings",
+		"myProjects": "My Projects",
+		"myTasks": "My Tasks"
 	},
 	"tabs": {
 		"all": "All"
@@ -190,6 +192,8 @@
 		"continue": "Continue",
 		"usernameLabel": "User name or ID",
 		"usernamePlaceholder": "Enter your user name or ID",
+		"emailLabel": "Email",
+		"emailPlaceholder": "Enter your email",
 		"passwordLabel": "Password",
 		"passwordPlaceholder": "Enter your Password",
 		"remember": "Remember me",
@@ -199,6 +203,10 @@
 				"min": "Login must be longer than 5 characters",
 				"max": "Login must be shorter than 20 characters",
 				"required": "Login is required"
+			},
+			"email": {
+				"format": "Invalid email format",
+				"required": "Email is required"
 			},
 			"password": {
 				"min": "Password must be at least 6 characters",
@@ -218,6 +226,30 @@
 		"edituser": "Edit User",
 		"team": "Team",
 		"settings": "Settings",
-		"login": "Login"
+		"login": "Login",
+		"userManagement": "User Management"
+	},
+	"admin": {
+		"userManagement": "User Management",
+		"role": "Role",
+		"createUser": "Create User",
+		"createNewUser": "Create New User",
+		"userCreated": "User Created Successfully",
+		"copyPassword": "Copy Password",
+		"savePasswordWarning": "Please save this password. It will not be shown again.",
+		"confirmDelete": "Are you sure you want to delete this user?",
+		"confirmResetPassword": "Are you sure you want to reset the password for this user?",
+		"passwordResetSuccess": "Password Reset Successfully",
+		"resetPassword": "Reset Password",
+		"actions": "Actions",
+		"createdDate": "Created Date"
+	},
+	"roles": {
+		"admin": "Admin",
+		"user": "User"
+	},
+	"common": {
+		"close": "Close",
+		"delete": "Delete"
 	}
 }

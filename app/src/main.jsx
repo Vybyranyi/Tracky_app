@@ -8,9 +8,10 @@ import taskReduser from './store/Tasks/TasksSlice.js';
 import AuthReducer from './store/Auth/AuthSlice.js';
 import projectsReducer from './store/projects/projectsSlice.js';
 import UsersReducer from './store/Users/usersSlice.js'
+import UsersManagementReducer from './store/Users/UsersManagementSlice.js';
 import SettingsReducer from './store/Settings/settingsSlice.js';
 import { BrowserRouter } from 'react-router-dom';
-import './i18n'; 
+import './i18n';
 
 
 const store = configureStore({
@@ -19,6 +20,7 @@ const store = configureStore({
     tasks: taskReduser,
     projects: projectsReducer,
     users: UsersReducer,
+    usersManagement: UsersManagementReducer,
     settings: SettingsReducer,
   }
 })

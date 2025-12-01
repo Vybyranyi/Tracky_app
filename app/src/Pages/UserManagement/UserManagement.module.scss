@@ -1,0 +1,149 @@
+@use '../../assets/styles/colorVariables.scss' as *;
+
+.container {
+    padding: 30px;
+    color: var(--Black);
+    background-color: var(--Backgroung);
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--Black);
+}
+
+.createButton {
+    background-color: var(--Base-purple);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: var(--Base-purple-hover);
+    }
+}
+
+.tableContainer {
+    background-color: var(--White);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+}
+
+.usersTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+
+    th {
+        padding: 15px;
+        text-align: left;
+        color: var(--Gray-500);
+        font-weight: 600;
+        font-size: 14px;
+        border-bottom: 1px solid var(--Gray-200);
+    }
+
+    td {
+        padding: 15px;
+        color: var(--Black);
+        font-size: 15px;
+        background-color: var(--White);
+
+        &:first-child {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        &:last-child {
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+    }
+}
+
+.roleBadge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: capitalize;
+    display: inline-block;
+
+    &.admin {
+        background-color: var(--Error-red-background);
+        color: var(--Error-red);
+    }
+
+    &.manager {
+        background-color: var(--Pending-background);
+        color: var(--Pending);
+    }
+
+    &.developer {
+        background-color: var(--Approved-background);
+        color: var(--Approved);
+    }
+
+    &.user {
+        background-color: var(--Gray-200);
+        color: var(--Gray-600);
+    }
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+}
+
+.actionButton {
+    background: var(--Gray-50);
+    border: 1px solid var(--Gray-200);
+    color: var(--Gray-500);
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.2s;
+
+    &:hover {
+        color: var(--Base-purple);
+        border-color: var(--Base-purple);
+        background-color: var(--Brand-100);
+    }
+
+    &.delete:hover {
+        color: var(--Error-red);
+        border-color: var(--Error-red);
+        background-color: var(--Error-red-background);
+    }
+}
+
+.error {
+    color: var(--Error-red);
+    margin-bottom: 20px;
+    background-color: var(--Error-red-background);
+    padding: 15px;
+    border-radius: 10px;
+}
