@@ -37,7 +37,7 @@ export const createUser = createAsyncThunk(
             });
             const data = await res.json();
             if (!res.ok) throw new Error(data.message || 'Failed to create user');
-            return data; // Expected: { user, generatedPassword }
+            return data;
         } catch (err) {
             return rejectWithValue(err.message);
         }
@@ -83,15 +83,24 @@ export const deleteUser = createAsyncThunk(
 
 export const resetUserPassword = createAsyncThunk(
     'usersManagement/resetUserPassword',
-    async (id, { rejectWithValue }) => {
+    async (userId, { getState, rejectWithValue }) => {
         try {
-            const res = await fetch(`${API_URL}/admin/users/${id}/reset-password`, {
+            const res = await fetch(`${API_URL}/admin/users/${userId}/reset-password`, {
                 method: 'POST',
                 headers: getAuthHeader()
             });
             const data = await res.json();
             if (!res.ok) throw new Error(data.message || 'Failed to reset password');
-            return data; // Expected: { message, generatedPassword }
+            
+            // Додаємо email користувача до відповіді
+            const users = getState().usersManagement.users;
+            const user = users.find(u => u._id === userId);
+            
+            return { 
+                ...data, 
+                email: user?.email,
+                generatedPassword: data.newPassword // Бекенд повертає newPassword
+            };
         } catch (err) {
             return rejectWithValue(err.message);
         }
@@ -104,9 +113,9 @@ const usersManagementSlice = createSlice({
         users: [],
         isLoading: false,
         error: null,
-        createdUser: null, // To store result of creation for modal
-        resetPasswordResult: null, // To store result of password reset for modal
-        editingUser: null, // User being edited
+        createdUser: null,
+        resetPasswordResult: null,
+        editingUser: null,
     },
     reducers: {
         clearCreatedUser: (state) => {
@@ -116,7 +125,9 @@ const usersManagementSlice = createSlice({
             state.resetPasswordResult = null;
         },
         setEditingUser: (state, action) => {
-            state.editingUser = action.payload;
+            const userId = action.payload;
+            const user = state.users.find(u => u._id === userId);
+            state.editingUser = user || null;
         },
         clearEditingUser: (state) => {
             state.editingUser = null;
@@ -124,7 +135,6 @@ const usersManagementSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            // Fetch Users
             .addCase(fetchUsers.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
@@ -137,7 +147,6 @@ const usersManagementSlice = createSlice({
                 state.isLoading = false;
                 state.error = action.payload;
             })
-            // Create User
             .addCase(createUser.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
@@ -151,28 +160,25 @@ const usersManagementSlice = createSlice({
                 state.isLoading = false;
                 state.error = action.payload;
             })
-            // Update User
             .addCase(updateUser.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
             })
             .addCase(updateUser.fulfilled, (state, action) => {
                 state.isLoading = false;
-                const index = state.users.findIndex(u => u._id === action.payload._id);
+                const index = state.users.findIndex(u => u._id === action.payload.user._id);
                 if (index !== -1) {
-                    state.users[index] = action.payload;
+                    state.users[index] = action.payload.user;
                 }
-                state.editingUser = null; // Clear editing user after success
+                state.editingUser = null;
             })
             .addCase(updateUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
             })
-            // Delete User
             .addCase(deleteUser.fulfilled, (state, action) => {
                 state.users = state.users.filter(u => u._id !== action.payload);
             })
-            // Reset Password
             .addCase(resetUserPassword.fulfilled, (state, action) => {
                 state.resetPasswordResult = action.payload;
             });

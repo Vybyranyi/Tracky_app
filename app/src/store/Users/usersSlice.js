@@ -7,13 +7,14 @@ const initialState = {
   editUser: null,
 };
 
+// Отримуємо користувачів з /admin/users (а не з /team)
 export const fetchUsers = createAsyncThunk(
-  'users',
+  'users/fetch',
   async (payload, { getState, rejectWithValue }) => {
     try {
       const token = getState().auth.token;
 
-      const res = await fetch(`${API_URL}/team`, {
+      const res = await fetch(`${API_URL}/admin/users`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -21,7 +22,7 @@ export const fetchUsers = createAsyncThunk(
 
       if (!res.ok) {
         const data = await res.json();
-        return rejectWithValue(data.message || 'Failed to fetch tasks');
+        return rejectWithValue(data.message || 'Failed to fetch users');
       }
 
       const data = await res.json();
@@ -87,6 +88,7 @@ export const saveEditedUser = createAsyncThunk(
     }
   }
 );
+
 export const deleteUser = createAsyncThunk(
   'users/deleteUser',
   async (userId, { getState, rejectWithValue }) => {
@@ -139,11 +141,11 @@ const usersSlice = createSlice({
       });
     builder
       .addCase(saveEditedUser.fulfilled, (state, action) => {
-        const index = state.users.findIndex(user => user._id === action.payload.id);
+        const index = state.users.findIndex(user => user._id === action.payload._id);
         if (index !== -1) {
           state.users[index] = action.payload;
         }
-        state.editUser = null; // Clear editUser after saving
+        state.editUser = null;
       })
       .addCase(saveEditedUser.rejected, (state, action) => {
         console.error('Error saving edited user:', action.payload);

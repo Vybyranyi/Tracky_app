@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { createUser, clearCreatedUser, updateUser, clearEditingUser } from '../../store/Users/UsersManagementSlice';
@@ -11,6 +11,7 @@ import BigTitle from '../../Components/BigTitle/BigTitle';
 import BigButton from '../../Components/BigButton/BigButton';
 import PasswordDisplayModal from '../../Components/PasswordDisplayModal/PasswordDisplayModal';
 import { Select } from 'antd';
+import { useState } from 'react';
 
 export default function CreateUser() {
     const dispatch = useDispatch();
@@ -25,7 +26,6 @@ export default function CreateUser() {
         }
     }, [createdUser]);
 
-    // Clean up editing user on unmount
     useEffect(() => {
         return () => {
             dispatch(clearEditingUser());
@@ -73,7 +73,8 @@ export default function CreateUser() {
                         if (isEdit) {
                             dispatch(updateUser({ id: editingUser._id, ...values }))
                                 .unwrap()
-                                .then(() => navigate('/usermanagement'));
+                                .then(() => navigate('/usermanagement'))
+                                .catch((err) => console.error('Update failed:', err));
                         } else {
                             dispatch(createUser(values));
                         }

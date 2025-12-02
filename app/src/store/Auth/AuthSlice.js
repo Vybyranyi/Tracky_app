@@ -10,10 +10,8 @@ const getInitialRole = () => {
   return localStorage.getItem('userRole') || sessionStorage.getItem('userRole') || '';
 };
 
-// Перевіряємо чи токен не закінчився
 const isTokenExpired = (token) => {
   if (!token) return true;
-
   try {
     const payload = JSON.parse(atob(token.split('.')[1]));
     const currentTime = Date.now() / 1000;
@@ -27,7 +25,6 @@ const initialToken = getInitialToken();
 const initialRole = getInitialRole();
 const tokenValid = initialToken && !isTokenExpired(initialToken);
 
-// Якщо токен закінчився - очищаємо сховище
 if (initialToken && !tokenValid) {
   localStorage.removeItem('token');
   sessionStorage.removeItem('token');
@@ -39,6 +36,7 @@ const initialState = {
   isAuth: tokenValid,
   token: tokenValid ? initialToken : '',
   userRole: tokenValid ? initialRole : '',
+  userProfile: null,
   error: null
 };
 
@@ -58,11 +56,6 @@ export const signInAsync = createAsyncThunk(
         return rejectWithValue(data.message || 'Invalid credentials');
       }
 
-      // Assuming the backend returns { token, role } or { token, user: { role } }
-      // Based on typical patterns and request description. 
-      // If backend only returns token, we might need to decode it or fetch profile.
-      // For now, I'll assume data.role exists or data.user.role.
-      // Let's try to find it safely.
       const role = data.role || (data.user && data.user.role) || 'user';
 
       if (rememberMe) {
@@ -80,6 +73,27 @@ export const signInAsync = createAsyncThunk(
   }
 );
 
+export const fetchUserProfile = createAsyncThunk(
+  'auth/fetchProfile',
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const token = getState().auth.token;
+      const res = await fetch(`${API_URL}/profile`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        return rejectWithValue(data.message || 'Failed to fetch profile');
+      }
+
+      return await res.json();
+    } catch (err) {
+      return rejectWithValue(err.message || 'Network error');
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -88,6 +102,7 @@ const authSlice = createSlice({
       state.isAuth = false;
       state.token = '';
       state.userRole = '';
+      state.userProfile = null;
       localStorage.removeItem('token');
       sessionStorage.removeItem('token');
       localStorage.removeItem('userRole');
@@ -98,12 +113,12 @@ const authSlice = createSlice({
       state.token = action.payload.token;
       state.userRole = action.payload.role || getInitialRole();
     },
-    // Перевірка токена вручну
     checkToken: (state) => {
       if (state.token && isTokenExpired(state.token)) {
         state.isAuth = false;
         state.token = '';
         state.userRole = '';
+        state.userProfile = null;
         localStorage.removeItem('token');
         sessionStorage.removeItem('token');
         localStorage.removeItem('userRole');
@@ -123,7 +138,14 @@ const authSlice = createSlice({
         state.isAuth = false;
         state.token = '';
         state.userRole = '';
+        state.userProfile = null;
         state.error = action.payload || 'Login failed';
+      })
+      .addCase(fetchUserProfile.fulfilled, (state, action) => {
+        state.userProfile = action.payload;
+      })
+      .addCase(fetchUserProfile.rejected, (state, action) => {
+        console.error('Failed to fetch profile:', action.payload);
       });
   }
 });

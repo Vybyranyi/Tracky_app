@@ -36,8 +36,8 @@ const UserManagement = () => {
         }
     };
 
-    const handleEdit = (user) => {
-        dispatch(setEditingUser(user));
+    const handleEdit = (userId) => {
+        dispatch(setEditingUser(userId));
         navigate('/createuser');
     };
 
@@ -84,7 +84,7 @@ const UserManagement = () => {
                                 <td className={styles.actions}>
                                     <button
                                         className={styles.actionButton}
-                                        onClick={() => handleEdit(user)}
+                                        onClick={() => handleEdit(user._id)}
                                         title={t('actions.edit')}
                                     >
                                         <i className="fa-solid fa-pen"></i>
@@ -113,7 +113,7 @@ const UserManagement = () => {
             <PasswordDisplayModal
                 isOpen={showPasswordModal}
                 onClose={closePasswordModal}
-                email={resetPasswordResult?.email} // Assuming backend returns email in reset result, or we can find it in users
+                email={resetPasswordResult?.email}
                 password={resetPasswordResult?.generatedPassword}
                 titleKey="admin.passwordResetSuccess"
             />
