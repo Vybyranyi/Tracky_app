@@ -94,6 +94,32 @@ export const fetchUserProfile = createAsyncThunk(
   }
 );
 
+export const uploadAvatar = createAsyncThunk(
+  'auth/uploadAvatar',
+  async (file, { getState, rejectWithValue }) => {
+    try {
+      const token = getState().auth.token;
+      const formData = new FormData();
+      formData.append('avatar', file);
+
+      const res = await fetch(`${API_URL}/profile/avatar`, {
+        method: 'PUT',
+        headers: { 'Authorization': `Bearer ${token}` },
+        body: formData
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        return rejectWithValue(data.message || 'Failed to upload avatar');
+      }
+
+      return await res.json();
+    } catch (err) {
+      return rejectWithValue(err.message || 'Network error');
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -146,6 +172,14 @@ const authSlice = createSlice({
       })
       .addCase(fetchUserProfile.rejected, (state, action) => {
         console.error('Failed to fetch profile:', action.payload);
+      })
+      .addCase(uploadAvatar.fulfilled, (state, action) => {
+        if (state.userProfile) {
+          state.userProfile.avatar = action.payload.user.avatar;
+        }
+      })
+      .addCase(uploadAvatar.rejected, (state, action) => {
+        console.error('Failed to upload avatar:', action.payload);
       });
   }
 });

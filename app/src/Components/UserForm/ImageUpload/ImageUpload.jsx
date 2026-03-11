@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './ImageUpload.module.scss';
 import { useTranslation } from 'react-i18next';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 export default function ImageUpload({ value, onChange }) {
 
   const { t } = useTranslation();
@@ -13,7 +15,7 @@ export default function ImageUpload({ value, onChange }) {
     const formData = new FormData();
     formData.append('file', file);
     try {
-      const res = await fetch('https://tracky-server.onrender.com/api/upload', {
+      const res = await fetch(`${API_URL}/api/upload`, {
         method: 'POST',
         body: formData,
         headers: {

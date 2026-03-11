@@ -27,6 +27,7 @@ export default function CreateProject() {
         desc: '',
         deadline: '',
         managerId: '',
+        img: '',
     };
 
     return (

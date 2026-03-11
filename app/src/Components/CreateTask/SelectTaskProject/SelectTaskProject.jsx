@@ -3,6 +3,7 @@ import { Select, Avatar } from 'antd';
 import styles from './SelectTaskProject.module.scss';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { getProjectImageSrc } from '../../../utils/getProjectImageSrc';
 
 const { Option } = Select;
 
@@ -26,7 +27,7 @@ export default function SelectTaskProject({ value, onChange }) {
         {projects.map(project => (
           <Option key={project._id} value={project._id}>
             <div className={styles.option}>
-              <Avatar src={`projects/${project.img}.png`} size="small" />
+              <Avatar src={getProjectImageSrc(project.img)} size="small" />
               <span className={styles.name}>{project.title}</span>
             </div>
           </Option>

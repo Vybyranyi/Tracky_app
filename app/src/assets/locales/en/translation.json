@@ -20,7 +20,9 @@
 		"themeLabel": "Theme",
 		"dark": "Dark",
 		"light": "Light",
-		"language": "Language"
+		"language": "Language",
+		"profile": "Profile",
+		"changeAvatar": "Change Avatar"
 	},
 	"actions": {
 		"edit": "Edit",

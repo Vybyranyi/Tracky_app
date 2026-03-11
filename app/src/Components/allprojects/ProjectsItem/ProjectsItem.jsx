@@ -7,6 +7,7 @@ import { deleteProject } from '../../../store/projects/projectsSlice';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getDeadlineLabel } from '../../../utils/deadlineUtils';
+import { getProjectImageSrc } from '../../../utils/getProjectImageSrc';
 
 function ProjectsItem({ obj }) {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ function ProjectsItem({ obj }) {
 		<Link to={`/allprojects/${obj._id}`}>
 		  <div className={styles.project}>
 			<img
-			  src={`/projects/${obj.img}.png`}
+			  src={getProjectImageSrc(obj.img)}
 			  alt=""
 			  className={styles.projectBanner}
 			/>

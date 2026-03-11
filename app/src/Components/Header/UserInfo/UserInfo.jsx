@@ -40,7 +40,7 @@ export default function UserInfo() {
             </div>
             <div className={styles.userInfoRight}>
                 <Dropdown menu={{ items }} trigger={['click']}>
-                    <img className={styles.userPhoto} src={`/team/default-user.jpg`} alt="User photo" />
+                <img className={styles.userPhoto} src={userProfile?.avatar || `/team/default-user.jpg`} alt="User photo" />
                 </Dropdown>
             </div>
         </div>

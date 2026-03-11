@@ -42,8 +42,9 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    const role = localStorage.getItem('userRole') || sessionStorage.getItem('userRole');
     if (token) {
-      dispatch(setAuth(token));
+      dispatch(setAuth({ token, role }));
     }
   }, [dispatch]);
 

@@ -10,6 +10,7 @@ import styles from './CreateUser.module.scss';
 import BigTitle from '../../Components/BigTitle/BigTitle';
 import BigButton from '../../Components/BigButton/BigButton';
 import PasswordDisplayModal from '../../Components/PasswordDisplayModal/PasswordDisplayModal';
+import ImageUpload from '../../Components/UserForm/ImageUpload/ImageUpload';
 import { Select } from 'antd';
 import { useState } from 'react';
 
@@ -65,7 +66,8 @@ export default function CreateUser() {
                         email: editingUser?.email || '',
                         name: editingUser?.name || '',
                         job: editingUser?.job || '',
-                        role: editingUser?.role || 'user'
+                        role: editingUser?.role || 'user',
+                        avatar: editingUser?.avatar || '',
                     }}
                     enableReinitialize
                     validationSchema={validationSchema}
@@ -91,6 +93,14 @@ export default function CreateUser() {
                                     placeholder={t('auth.emailPlaceholder')}
                                 />
                                 <ErrorMessage name="email" component="div" className={styles.error} />
+                            </div>
+
+                            <div className={styles.formGroup}>
+                                <label className={styles.label}>{t('team.form.addimg')}</label>
+                                <ImageUpload
+                                    value={values.avatar}
+                                    onChange={(url) => setFieldValue('avatar', url)}
+                                />
                             </div>
 
                             <div className={styles.formGroup}>

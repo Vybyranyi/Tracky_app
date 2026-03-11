@@ -23,7 +23,9 @@
     "themeLabel": "Тема",
     "dark": "Темна",
     "light": "Світла",
-    "language": "Мова"
+    "language": "Мова",
+    "profile": "Профіль",
+    "changeAvatar": "Змінити аватар"
   },
   "actions": {
     "edit": "Редагувати",

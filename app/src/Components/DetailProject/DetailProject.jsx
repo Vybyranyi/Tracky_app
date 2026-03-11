@@ -7,7 +7,9 @@ import { fetchProjects } from '../../store/projects/projectsSlice';
 import { useTranslation } from 'react-i18next';
 import { getDeadlineLabel } from '../../utils/deadlineUtils';
 import HelmetComponent from '../Helmet/HelmetComponent';
-import defaultPhoto from '../../../public/team/default-user.jpg';
+import { getProjectImageSrc } from '../../utils/getProjectImageSrc';
+
+const defaultPhoto = '/team/default-user.jpg';
 
 
 
@@ -43,7 +45,7 @@ function DetailProject() {
 		<div className={styles.wrapper}>
 			<HelmetComponent title={project.title} />
 			<div className={styles.banner}>
-				<img src={`/projects/${project.img}.png`} />
+				<img src={getProjectImageSrc(project.img)} />
 			</div>
 			<div className={styles.descWrapper}>
 				<h2 className={styles.title}>{project.title}</h2>
@@ -54,7 +56,7 @@ function DetailProject() {
 					<p>
 						<i className="fa-solid fa-users" style={{ color: "#54577a" }}></i>
 						{t("projects.labels.manager")}
-						<img src={user?.img ? user.img : defaultPhoto} className={styles.user} />
+						<img src={user?.avatar || user?.img || defaultPhoto} className={styles.user} />
 						{user?.name || "Unknown User"}
 					</p>
 					<p>

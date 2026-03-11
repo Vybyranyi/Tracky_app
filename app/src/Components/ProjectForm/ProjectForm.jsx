@@ -6,7 +6,7 @@ import BigButton from '../BigButton/BigButton';
 import styles from './ProjectForm.module.scss';
 import SelectProjectManager from './SelectProjectManager/SelectProjectManager';
 import { useTranslation } from "react-i18next";
-import { Select } from "antd";
+import ImageUpload from '../UserForm/ImageUpload/ImageUpload';
 
 export default function ProjectForm({
     initialValues,
@@ -47,29 +47,14 @@ export default function ProjectForm({
                     if (!isEdit) resetForm();
                 }} enableReinitialize
             >
-                {({ isSubmitting }) => (
+                {({ isSubmitting, values, setFieldValue }) => (
                     <Form className={styles.form}>
                         <div className={styles.formGroup}>
                             <label htmlFor="img" className={styles.label}>{t('projects.form.imageSelect')}</label>
-                            <Field name="img">
-                                {({ field, form }) => (
-                                    <Select
-                                        id="img"
-                                        placeholder={t('projects.form.image')}
-                                        value={field.value}
-                                        onChange={(value) => form.setFieldValue('img', value)}
-                                        className={styles.imgSelect}
-                                        style={{ height: '120px' }}
-                                        options={[
-                                            { value: '01', label: <img src="/projects/01.png" alt="01" height={60} /> },
-                                            { value: '02', label: <img src="/projects/02.png" alt="02" height={60} /> },
-                                            { value: '03', label: <img src="/projects/03.png" alt="03" height={60} /> },
-                                            { value: '04', label: <img src="/projects/04.png" alt="04" height={60} /> },
-                                            { value: '05', label: <img src="/projects/05.png" alt="05" height={60} /> },
-                                        ]}
-                                    />
-                                )}
-                            </Field>
+                            <ImageUpload
+                                value={values.img}
+                                onChange={(url) => setFieldValue('img', url)}
+                            />
                             <ErrorMessage name="img" component="div" className={styles.error} />
 
                         </div>
