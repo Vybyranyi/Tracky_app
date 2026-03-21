@@ -1,4 +1,5 @@
 @use '../../../assets/styles/colorVariables.scss' as *;
+@use '../../../assets/styles/breakpoints' as *;
 
 
 
@@ -11,10 +12,17 @@
 	max-width: 328px;
 	box-sizing: border-box;
 
+	@media (max-width: $mobile) {
+		max-width: 100%;
+	}
 }
 
 .wrapper {
 	max-width: 328px;
+
+	@media (max-width: $mobile) {
+		max-width: 100%;
+	}
 	position: relative;
 	border-radius: 10px;
 	background-color: var(--White);

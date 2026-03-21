@@ -1,12 +1,18 @@
 @use '../../assets/styles/colorVariables.scss' as *;
+@use '../../assets/styles/breakpoints' as *;
 
 .allTasksTitle {
     display: flex;
     justify-content: space-between;
-    align-items: center; 
+    align-items: center;
     // gap: 36px;
     margin-bottom: 42px;
     width: 478px;
+
+    @media (max-width: $mobile) {
+      width: 100%;
+      margin-bottom: 16px;
+    }
 }
 
 .SerachBlock{
@@ -16,6 +22,13 @@
     padding-top: 42px;
     margin-bottom: 26px;
 
+    @media (max-width: $mobile) {
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+      padding-top: 16px;
+      margin-bottom: 16px;
+    }
 }
 
 .StatusButtonsBlock{
@@ -24,4 +37,9 @@
     gap: 16px;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: $mobile) {
+      flex-wrap: wrap;
+      gap: 8px;
+    }
 }

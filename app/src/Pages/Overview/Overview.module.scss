@@ -1,4 +1,5 @@
 @use '../../assets/styles/colorVariables.scss' as *;
+@use '../../assets/styles/breakpoints' as *;
 
 
 
@@ -7,16 +8,30 @@
     display: flex;
     gap: 75px;
 
+    @media (max-width: $mobile) {
+      flex-direction: column;
+      gap: 32px;
+    }
+
     .OverviewLeft {
         display: flex;
         flex-direction: column;
         gap: 58px;
         width: max-content;
+
+        @media (max-width: $mobile) {
+          width: 100%;
+          gap: 24px;
+        }
     }
 
     .OverviewRight {
         display: flex;
         flex-direction: column;
         gap: 20px;
+
+        @media (max-width: $mobile) {
+          width: 100%;
+        }
     }
 }

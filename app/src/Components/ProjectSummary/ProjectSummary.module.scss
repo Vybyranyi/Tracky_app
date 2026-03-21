@@ -1,7 +1,13 @@
 @use '../../assets/styles/colorVariables.scss' as *;
+@use '../../assets/styles/breakpoints' as *;
 
 .ProjectSummaryContainer {
     width: 700px;
+
+    @media (max-width: $mobile) {
+      width: 100%;
+      overflow-x: auto;
+    }
     color: var(--Black);
     font-family: "Poppins", sans-serif;
     display: flex;

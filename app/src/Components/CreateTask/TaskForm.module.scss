@@ -1,8 +1,13 @@
 @use '../../assets/styles/colorVariables.scss' as *;
+@use '../../assets/styles/breakpoints' as *;
 
 .wrapper {
   // padding: 26px;
   max-width: 500px;
+
+  @media (max-width: $mobile) {
+    max-width: 100%;
+  }
   font-family: "Poppins", sans-serif;
 
   .header {

@@ -1,4 +1,5 @@
 @use '../../../assets/styles/colorVariables.scss' as *;
+@use '../../../assets/styles/breakpoints' as *;
 
 .calendar{
     width: max-content;

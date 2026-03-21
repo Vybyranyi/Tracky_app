@@ -1,16 +1,29 @@
 @use '../../assets/styles/colorVariables.scss' as *;
+@use '../../assets/styles/breakpoints' as *;
 
 .loginContainer {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: $mobile) {
+      align-items: flex-start;
+      padding: 24px 16px;
+      box-sizing: border-box;
+    }
 }
 
 .loginFormMainBlock {
     font-family: "Poppins", sans-serif;
     width: 423px;
     padding: 36px 47px 40px 35px;
+
+    @media (max-width: $mobile) {
+      width: 100%;
+      padding: 28px 24px 32px;
+      box-sizing: border-box;
+    }
     border: solid 0.5px var(--Login-border);
     border-radius: 10px;
     background-color: var(--White);

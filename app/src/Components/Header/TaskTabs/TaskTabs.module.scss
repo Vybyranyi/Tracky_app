@@ -1,11 +1,24 @@
  @use '../../../assets/styles/colorVariables.scss' as *;
- 
+ @use '../../../assets/styles/breakpoints' as *;
+
  .taskTabs{
     // width: 684px;
     display: flex;
     justify-content: left;
     gap: 32px;
     padding: 42px 18px 24px 0;
+
+    @media (max-width: $mobile) {
+      gap: 20px;
+      padding: 16px 0 12px 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
 }
 
 .taskTabsBtn {
@@ -19,6 +32,12 @@
     padding: 4px 0;
     cursor: pointer;
     transition: color 0.3s ease;
+
+    @media (max-width: $mobile) {
+      font-size: 14px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
 }
 
 .taskTabsBtn:hover {

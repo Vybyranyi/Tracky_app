@@ -1,4 +1,12 @@
 @use '../../../assets/styles/colorVariables.scss' as *;
+@use '../../../assets/styles/breakpoints' as *;
+
+.tableWrapper {
+    @media (max-width: $mobile) {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
 
 .tasksTable {
     border-collapse: collapse;

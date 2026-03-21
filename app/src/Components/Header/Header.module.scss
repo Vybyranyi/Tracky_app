@@ -1,14 +1,23 @@
 @use '../../assets/styles/colorVariables.scss' as *;
+@use '../../assets/styles/breakpoints' as *;
 
 .headerContainer{
     display: flex;
     gap: 46px;
-    // width: max-content;
-    // padding-top: 32px;
+
+    @media (max-width: $mobile) {
+      flex-direction: column;
+      gap: 0;
+    }
 }
 
 .headerLeft{
-    // padding-left: 32px;
     width: 100%;
     border-bottom: solid 1px var(--White-hover);
+}
+
+.headerRight {
+    @media (max-width: $mobile) {
+      display: none;
+    }
 }

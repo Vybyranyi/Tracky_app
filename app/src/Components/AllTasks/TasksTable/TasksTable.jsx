@@ -171,6 +171,7 @@ export default function TasksTable({ tasks, isProjectsTasks = false }) {
             {displayedTasks.length === 0 ? (
                 <Empty />
             ) : (
+                <div className={styles.tableWrapper}>
                 <table className={styles.tasksTable}>
                     <colgroup>
                         <col className={styles.colTitle} />
@@ -283,6 +284,7 @@ export default function TasksTable({ tasks, isProjectsTasks = false }) {
                         ))}
                     </tbody>
                 </table>
+                </div>
             )}
             {filtred.isFiltred && <div className={styles.showBtn}>
                 <BigButton style='purple' text={t("show")} onClick={handleShowAll} />
